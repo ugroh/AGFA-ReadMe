@@ -12,7 +12,8 @@
 	,DIV			= calc 
 	,toc			= bib
 	,abstract		= true
-	,parskip			= half+
+	,parskip		= half+
+	,toc 		= numberline
 %	,mydina4
 		]{scrartcl}
 
@@ -55,7 +56,7 @@
 %% -- Inhaltsverzeichnis kompremiert
 %% --
 %\RedeclareSectionCommands[tocraggedpagenumber,toclinefill={}]{section,subsection}
-\RedeclareSectionCommands[tocraggedpagenumber]{section,subsection}
+%\RedeclareSectionCommands[tocraggedpagenumber]{section,subsection}
 \BeforeStartingTOC[toc]{\begin{multicols}{2}}
 \AfterStartingTOC[toc]{\end{multicols}}
 

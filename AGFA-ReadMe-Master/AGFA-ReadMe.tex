@@ -1,0 +1,157 @@
+% !TEX TS-program = pdflatexmk
+% !TEX useTabsWithFiles)
+% !TEX tabbedFile{./content/Abschnitt1.tex}(Abschnitt1)
+% !TEX tabbedFile{./content/Abschnitt2.tex}(Abschnitt2)
+% !TEX tabbedFile{./content/Abschnitt3.tex}(Test)
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Thema:  agfa-readme.tex   
+% % Stand:	2022/03/08     
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[%	
+	,toc		= bib 			 
+	,parskip		= half-		 
+	,headings	= normal			 	 		 
+	,numbers		= noenddot		
+	,leqno
+	,version 	= last
+% 	,DIV 		= calc
+	,titlepage	= true
+%	,twoside = true
+	,ngerman				% Deutscher Text
+%	,english				% Englischer Text	
+	]{scrartcl}			% KOMA Artikelmodus
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% -- Hierin sind alle weiteren Pakete enthalten
+%% -- Siehe agfa-readme.pdf für Details
+%% -- 
+ 
+\usepackage[%
+%	,thmframed			% gerahmte Umgebungen
+%	,lmodern				% lmodern
+% 	,libertinus			% libertinus
+%	,urldoi
+	,numeric
+	]{agfa-art} 
+
+%% -- Was soll aktuell bearbeitet werden
+%% -- Mittels % entsprechend steuern
+
+\includeonly{%
+	./content/Abschnitt0,
+	./content/Abschnitt1,
+	./content/Abschnitt2,
+	./content/Abschnitt3
+	} 
+
+%% -- Für den Druck % entfernen; 
+%% -- Notwendige Bindekorrektur
+
+\KOMAoptions{BCOR = 12mm}
+
+%% -- für die finale Version die folgenden Zeilen 
+%% -- mit % auskommentieren
+
+\KOMAoptions{footsepline}
+\lofoot{UG}
+\cofoot{Version}
+\rofoot{\today}
+
+%% -- Datei mit den Referenzen für Literatur
+%% -- und Steuerung für url etc. 
+%% -- siehe AGFA-ReadMe.pdf
+
+%\addbibresource{./bib/agfa-bib.bib}	
+\addbibresource{Buecher.bib}
+\addbibresource{Artikel.bib}
+\addbibresource{TeX.bib}
+\addbibresource{CTAN.bib}
+
+\ExecuteBibliographyOptions{%
+	,backref		= true		% wo habe ich was referenziert, alles andere weg
+ 	,url		= true		% true	wenn online-Zitate separat gezeigt werden sollen
+ 	,doi		= false		% dito falls unerwünscht, sinnvoll bei Vorlesungen 
+	,eprint		= false		% dito
+	} 
+
+%% -- Querverweise
+%% -- siehe AGFA-ReadMe.pdf
+
+\hypersetup{
+	,colorlinks	= true    			%  Farbige Links false/true, für onlineversion true                                                           
+	,urlcolor	= blue       		%                                                              
+	,citecolor	= blue      		                                                              
+	,linkcolor	= blue			 	% oder black
+	,breaklinks = true
+%  	,hidelinks 						% Vor dem Druck % entfernen
+	}
+
+%% -- Für das testen
+
+\usepackage{ablatt-listings}
+
+\renewcommand{\dictumwidth}{0.45\textwidth}
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frontmatter
+%% %%%%%%%%%%%%%%%%%%%%%%%%
+%% -- kann man anfangs übergehen
+%% -- daher %% hier und bei \end{comment} entfernen 
+
+%%\begin{comment}
+\begingroup
+	\input{./content/0-agfa-title}			% Titelseite
+	\pagestyle{empty}
+%	\input{./content/0-agfa-thanks}			% Danksagung
+	\tableofcontents 
+	\thispagestyle{empty}
+\endgroup
+
+%%% -- Zusammenfassung des Inhaltes
+%
+\cleardoubleoddpage 
+	\pagenumbering{roman}
+	\input{./content/0-readme-summary}		% Zusammenfassung
+\cleardoubleoddpage 
+
+%%\end{comment}
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mainmatter
+%% %%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{section}{0}
+\thispagestyle{empty}
+
+%% -- Die einzelnen Abschnitte
+%% -- Über \includeonly steuern, was aktuell bearbeitet wird
+%% --
+\include{./content/Abschnitt0}	
+\include{./content/Abschnitt1}				% Erster Abschnitt
+\include{./content/Abschnitt2}				% Zweiter Abschnitt
+\include{./content/Abschnitt3}				% Der Testteil
+
+\cleardoubleoddpage 
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%
+%% Backmatter
+%% %%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+%% -- Literaturverzeichnis
+%%
+%\nocite{}		% für Literatur, die nicht zitiert wurde; 
+				% wenig sinnvoll dieses zu tun; siehe ReadMe.pdf
+				
+\RaggedRight		% Kein Blocksatz
+\printbibliography
+
+%% --
+\end{document}

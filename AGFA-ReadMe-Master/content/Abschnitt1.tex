@@ -1,0 +1,510 @@
+
+% !TEX root = ../agfa-readme.tex
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section1 in ../agfa-readme.tex
+%% Stand: 2022/02/29
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\dictum[Uwe Seeler]{Ich bin dafür, jetzt mit der Relation erstmal im Dorf zu bleiben.} 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Vorlage}\label{sec:section1}
+%%
+\subsection{Der Aufbau}\label{subsec:aufbau}
+Die Vorlage wird als zip-File zur Verfügung gestellt, wobei diese Datei den folgenden Aufbau hat:
+%
+\begin{description}
+\item[./] Im Hauptverzeichnis befindet sich die Datei \lpkg{AGFA-Master.tex}, die als Basis für eine eigene Datei genommen wird.
+
+\item[./content] In diesem Unterverzeichnis stellt man die eigenen Dateien, die den Text enthalten, ein.
+Die momentan enthaltenen sollen als Beispiel dienen.
+
+\item[./preamble] Enthält alle Steuerungspakete, die benutzt werden. 
+Auf diese wird mittels \lpkg{./preamble/agfa-art.sty} zugegriffen und die im Weiteren beschreiben wird.%
+\footnote{In dieser Dokumentation ist auf den Präfix \texttt{./preamble} verzichtet worden.} 
+
+\item[./bib] Enthält eine Musterdatenbank mit einigen Literaturverweisen, die hier genutzt werden.
+Der Aufbau, die Pflege und die Nutzung ist von mir in dem \LaTeX\-Tipps~6 beschrieben (siehe \cite{latextipps6})
+
+\item[./texmf]
+Bildet die Struktur von \texttt{texmf} ab, das auf einen PC bei einer richtigen \TeX-Installation vorhanden ist: 
+Bei Mac OS X findet es sich unter \texttt{~/Library} für Windows \bzw Linux direkt unter dem Home-Verzeichnis.
+Ich empfehle dieses zu nutzen, da man dann stets auf alle Steuerungsdateien und die Literaturdatenbank zugreifen kann.  
+
+\end{description}
+%
+Zur Installation: Wer Overleaf nutzt, der kann das ZIP-File hochladen und das Overleaf-System installiert dieses mit den entsprechenden Unterverzeichnissen.
+Das Master-File und seine eigenen Dateien entsprechend umbenennen
+
+Wer die Vorlage lokal auf seinem PC nutzen will, kann natürlich das ZIP-File auf dem PC installieren (in einem geeigneten Unterverzeichnis) und kann danach damit ohne Probleme arbeiten -- ein Nachteil ist es aber, dass man an diese Struktur gebunden ist.
+
+Eleganter ist es, die Pakete im Unterverzeichnisse 
+%%
+\begin{center}
+\texttt{./texmf/tex/agfa}
+\end{center}
+%%
+in das entsprechenden Unterverzeichnisses des eigenen \texttt{texmf}-Unterverzeichnis kopieren, wobei hierfür noch das Unterverzeichnis \texttt{texmf/tex/latex/agfa} angelegt werden muss.
+Dabei ist bereits berücksichtigt, dass dann im eigenen System dann der Aufruf über \texttt{texmf} erfolgt, \dh \texttt{./preamble} als Präfix entfällt.
+Alles zu \texttt{texmf} erfährt \href{https://tex.stackexchange.com/questions/420620/what-is-texmf-and-what-is-its-relation-to-tex}{man unter diesem Link}.
+%%
+\subsection{Enthaltene Steuerungsdateien}\label{subsec:dateieninzipfile}
+%
+Im Einzelnen sind in dem ZIP-File unter \texttt{./preamble/..} folgende Dateien enthalten:
+
+\begin{description}
+\item[\cs{agfa-art.sty}]
+Über dieses Datei wird (bis auf das Literaturverzeichnis) alles weitere gesteuert und auf die hier weiter aufgeführten Dateien verwiesen.
+Diese Datei dient zur Vereinfachung und zur Übersichtlichkeit der Präambel bei.
+
+\item[\cs{agfa-babel.sty}]
+Mit Hilfe dieser Datei wird die Unterstützung von Deutsch \bzw Englisch gesteuert; siehe hierzu \vref{subsec:babel}.
+
+\item[\cs{agfa-layout.sty}]
+Enthält das Layout des Dokuments, also Seitenüberschriften, Formatierung der Absätze \etc; bitte so belassen; siehe hierzu \vref{subsec:agfa-layout}.
+
+\item[\cs{agfa-hyperef.sty}]
+Für Links und Querverweise erforderlich.
+
+\item[\cs{agfa-listen.sty}]
+Alles, was für Aufzählungen erforderlich ist.
+
+\item[\cs{agfa-mathtools}]
+Mathematische Unterstützung; 
+
+
+\item[\cs{agfa-defn.sty}]
+Abkürzungen,  die die Eingabe des Textes unterstützen.
+
+\item[\cs{agfa-pakete.sty}]
+Einige sinnvolle Pakete.
+
+\item[\cs{agfa-theorem.sty}]
+Die Theoremumgebungen.
+
+\item[\cs{agfa-biblio.sty}]
+Für die Ausgabe des Literaturverzeichnisses.
+
+\end{description} 
+%
+\subsection{Die Prämbel}\label{subsec:preamble}
+%
+In der Präambel sind alle Dateien enthalten, die zur \enquote{Steuerung} von \LaTeX{} erforderlich sind.
+Diese Dateien enthalten Vorgaben für das Layout, die Schrift, die Sprachunterstützung \etc und sind im Folgenden beschrieben.
+
+Als Dokumentenklasse wurde KOMA-Script genutzt und wir starten daher mit
+%
+\begin{tcblisting}{title= KOMA-Klasse, listing only}
+\documentclass[%	 -- siehe KOMA-Script 
+	,toc		= bib 		 
+	,parskip		= half-		 
+	,headings	= normal			 	 		 
+	,numbers		= noenddot		
+	,leqno
+	,version 	= last
+%	,DIV 		= calc
+	,titlepage	= true
+	,ngerman				% Deutscher Text 
+%	,english				% Englischer Text	
+	]{scrartcl}			% KOMA Artikelmodus			 
+\end{tcblisting}
+%
+Mittels der Eingabe von \texttt{ngerman} \bzw \texttt{english} steuert man die globale Sprache des Dokuments. 
+Lokal kann man dann mittels des Pakets \lpkg{babel} noch andere Sprachen einbinden (siehe \vref{subsec:babel}).
+%%
+\begin{tcblisting}{title= Das Paket \lpkg{agfa-art}, listing only}
+\usepackage[%
+	,thmframed			% gerahmte Umgebungen
+	,numeric				% Nummeriertes LV
+	,urldoi				% URL bzw. DOI unter dem Titel der Referenz
+	,lmodern				% lmodern oder
+%	,libertinus			% libertinus
+	]{./preamble/agfa-art} 
+\end{tcblisting}
+%%
+Über das Paket \lpkg{./preamble/agfa-art-sty} wird alles weitere \enquote{gesteuert} und man gibt seine \enquote{Wünsche} wie immer an.
+
+
+\begin{myitemize}
+
+\item
+Angaben zu einem eventuellen alternativen Schriftsatz (siehe \cref{agfa-font}), obwohl der eingestellte alles erfüllt.
+
+\item
+Die Art der Nummerierung in dem Literaturverzeichnis, wobei man bei dem eingestellten Wert bleiben sollte, \texttt{numeric}.
+
+\item
+Angaben zum Setzen der Theoremumgebungen, \dh mit oder ohne Rahmen (\texttt{thmframed}).
+
+\item
+Unterlegung der Literaturtitel mit den entsprechend Links zu Onlineversionen durch Eingabe von \texttt{urldoi}: (siehe hierzu \vref{subsec:agfa-biblio})
+\end{myitemize}
+%
+Also momentan ist ein deutscher Text, gerahmte Theoremumgebungen und die Hinterlegung von URL's oder DOI's hinter dem Titel des Literaturzitats bedeuten (siehe etwa das Literaturverzeichnis dieses AGFA-ReadMe).
+
+Änderungen und andere Optionen, die KOMA-Script betreffen, können über 
+%
+\begin{center}
+\cs{KOMAoptions\marg{Optionen}} 
+\end{center}
+%
+eingebaut werden; siehe hierzu die entsprechenden Abschnitte in \textcite{kohm:2020}.
+Dazu gehört unbedingt die Berücksichtigung einer \enquote{Bindekorrektur} berücksichtigt, indem man bei 
+%
+\begin{tcblisting}{listing only}
+%% -- Für den Druck %% entfernen
+% \KOMAoptions{BCOR = 12mm}
+\end{tcblisting}
+%
+das \texttt{\%} entfernt.
+
+%%
+\subsection{Die Hauptdatei \texttt{agfa-art.sty}}\label{subsec:agfa-art}
+%
+Über die Datei \lpkg{agfa-art.sty} werden alle Formatierungsschritte gesteuert.
+Ich habe bewusst dies so gemacht, damit die Präambel übersichtlich bleibt. 
+Die Eingabe erfolgt über
+%
+\begin{tcolorbox}
+\cs{usepackage}\brackets{agfa-art}
+\end{tcolorbox}
+%%
+%\begin{center}
+%\lcmd{usepackage[auswahl]\{agfa-art\} }
+%\end{center}
+%%
+%wobei \oarg{auswahl} sein kann
+%
+%\begin{enumerate}[(i)]
+%
+%
+%\item
+%\emph{thmframed}: Dann werden die mathematischen Umgebungen mit einen Rahmen versehen (siehe etwa Zitat).
+%
+%\item
+%\emph{libertinus} \bzw \emph{lmodern}: Alternative Schriften; siehe \vref{agfa-font}.
+%
+%\end{enumerate}
+Für \LaTeX-Fachleute: Man kann aus dieser Datei natürlich auch eine eigene Klasse machen, habe aber bewusst darauf verzichtet, da das System dann aus meiner Sicht komplexer geworden wäre. 
+Wer mehr dazu wissen will: \textcite{goossen:2005} ist eine gute Quelle.
+%
+\subsection{Sprachunterstützung \texttt{agfa-babel.sty}}\label{subsec:babel}
+%
+Die Vorlage ist so eingerichtet, dass man sowohl Deutsch als auch Englisch ausgewählt werden kann: Wenn Deutsch, dann bitte in \emph{english} auskommentieren (mit einem \% versehen); falls es eine englische Variante werden soll, dann umgekehrt.
+Dies wird dann an alle Pakete, die verwendet werden, weitergereicht und entsprechend genutzt.
+
+In dem \og Paket sind die Pakete \lpkg{babel} und \lpkg{csquotes} enthalten, die die Sprachunterstützung unterstützen, \inkl des richtigen \enquote{Trennungsmuster} für Deutsch:
+%
+\begin{tcblisting}{listing only}
+\usepackage}[english,main=ngerman]{babel}
+\babelprovide[hyphenrules=ngerman-x-latest]{ngerman}
+\end{tcblisting}
+%
+Wird \emph{english} ausgewählt, so wird 
+%
+\begin{tcblisting}{listing only}
+\{usepackage}[ngermen,main=english]{babel}
+\end{tcblisting}
+%
+aufgerufen.
+
+Mit Hilfe von des Pakets \lpkg{csquotes} bekommt man nun die richtigen Anführungszeichen für die jeweilige Sprache, die man gewählt hat, also etwa 
+%
+\begin{tcolorbox}
+\cs{usepackage}[autostyle,german=guillemets]\{csquotes\}
+\end{tcolorbox}
+%
+werden in beiden Fällen die richtigen Anführungszeichen gesetzt, also etwa
+%
+\begin{tcblisting}{title= \enquote{Anführungszeichen Deutsch}}
+Richtig: \enquote{Gänsefüßchen}
+Und noch richtiger: \enquote{Gänsefüßchen und nochmals \enquote{Gänsefüßchen} im Text}
+\end{tcblisting}
+%
+In beiden Fällen kann man in eine andere Sprache umschalten, etwa von deutsch auf englisch:
+%
+\begin{otherlanguage}{english}
+\begin{tcblisting}{title= \enquote{Anführungszeichen Englisch}}
+Now we get \enquote{the right one.}
+Additionally: \enquote{Gänsefüßchen and once more \enquote{Gänsefüßchen} in the text.}
+\end{tcblisting}
+\end{otherlanguage}
+%
+Wer aber weitere Sprachen nutzen will, muss dieses entsprechend ergänzen.
+Details hierzu und wie man umschaltet findet man im Manual zum Paket \lpkg{babel} unter 
+\href{https://ctan.ebinger.cc/tex-archive/macros/latex/required/babel/base/babel.pdf}{babel.pdf} oder schaut in \textcite[3.7.2]{voss:2012a} rein.
+
+Falls die Trennung nicht korrekt ist, so hilft \lcmd{hyphenation} in der Präambel, mal in das Manual zu \lpkg{babel} reinsehen (oder in die angegeben Literatur).
+%%
+\subsection{Eingabe von Abkürzungen: \texttt{agfa-abkuerz.sty}}\label{agfa-abkuerz}
+In dieser Datei sind einige Abkürzungen definiert. 
+Motivation: Aber was ist mit d.h.? Diese Eingabe ist so falsch, da nach dem Komma ein kleiner Abstand sein soll, also \dh, was man mittels \verb|d.\,h.| eingeben muss.
+Da \TeX\ den Punkt nicht als Satzende interpretiert, muss dem System noch mitgeteilt werden, dass der Punkt kein Satzende ist.
+Dies gilt auch für u.\,a., z.\,B. \etc
+
+Dies bekommt man mittels des Paketes \lpkg{xspace} und den entsprechenden Definitionen einfach implementiert.%
+\footnote{Bitte im Manual \href{https://mirror.informatik.hs-fulda.de/tex-archive/macros/latex/required/tools/xspace.pdf}{xspace.pdf} nachlesen, was es mit dem \cs{xspace} auf sich hat} 
+%
+\begin{tcblisting}{listing only}
+\renewcommand{\dh}{d.\,h.\xspace}
+\newcommand{\ua}{u.\,a.\xspace}
+\newcommand{\zB}{z.\,B.\xspace}
+\newcommand{\og}{o.\,g.\xspace}
+\newcommand{\etc}{etc.\xspace}
+\newcommand{\bzw}{bzw.\xspace}
+\newcommand{\inkl}{inkl.\xspace}
+\newcommand{\ia}{i.\,A.\xspace}
+\end{tcblisting}
+%
+etwa ergibt \cs{ua} dann \ua
+
+Für Englisch ist definiert:
+%
+\begin{tcblisting}{listing only}
+\renewcommand{\eg}{e.g.\xspace}
+\newcommand{\ie}{i.e.\xspace}
+\end{tcblisting}
+%
+Etwa \cs{eg} ergibt \eg 
+
+Für weitere englische Abkürzungen muss man es entsprechend ergänzen.
+
+Bitte auch beachten: 
+\begin{tcblisting}{title= Gedankenstrich und Minuszeichen}
+Es ist ein Unterschied, ob ich $ 2 - 1 $ (Minuszeichen) oder - oder -- eingebe.
+\end{tcblisting}
+%%
+Die Eingabe von \enquote{-}, etwa bei \LaTeX{}-Vorlage richtig und die Eingabe von \enquote{--}, etwa im Sinne von  \enquote{von--bis}.
+In \TeX{} macht man dieses mit \verb+-+ \bzw \verb+--+; weiteres dazu findet man unter \href{https://typefacts.com/artikel/binde-und-gedankenstrich}{Binde- und Gedankenstrich}.%
+\footnote{Nützlich dazu ist auch der \href{https://de.wikipedia.org/wiki/Duden}{Duden}.}
+%
+\subsection{Das Layout: \texttt{agfa-layout}}\label{subsec:agfa-layout}
+\subsubsection{}\label{subsubsec:test}
+Die Definitionen zum Layout findet sich in \texttt{agfa-layout.sty} und sollten so belassen werden.
+
+Alle Abschnitte verhalten sich bei 
+%
+\begin{tcolorbox}
+\cs{section}\brackets{Haupttitel}
+\end{tcolorbox}
+%
+und
+%
+\begin{tcolorbox}
+\cs{subsection}\brackets{Untertitel}
+\end{tcolorbox}
+%
+wie gewohnt, nur im TOC gibt es keine Seitenangaben für den jeweiligen Hauptabschnit \cs{section}, da ich dieses für überflüssig halte.
+Der einzige Unterschied ist der Befehl
+%
+\begin{tcolorbox}
+\cs{subsubsection}\brackets{}
+\end{tcolorbox}
+%
+Bei diesem wird innerhalb des Hauptabschnittes nur durchnummeriert aber man kann darauf verweisen.
+Optional kann man auch einen Titel eingeben, der aber nicht im TOC erscheint.
+Dies habe ich aus \textcite{bourbaki:spectrales} übernommen, was ich persönlich gut finde, da es eine weitere Struktur in den Text bringt, diesen aber mit mit weiteren Überschriften überfrachtet.
+%
+\begin{NoTOCEntry}
+%%
+\begin{tcblisting}{title= Ein Beispiel}
+\section{Die Vorlage}\label{sec:section1}
+\subsection{Der Aufbau}\label{subsec:aufbau}
+%% --
+Die Vorlage wird als zip-File \texttt{AGFA-Master.zip} zur Verfügung gestellt, wobei diese Datei den folgenden Aufbau hat: \ldots
+%% --
+\subsection{Ein weitere Abschnitt}\label{subsec:weiterer-abschnitt}
+\subsubsection{}\label{subsubsec:test}
+%% --
+Ein weitere Unterabschnitt, der noch einen Unter-Unter-Abschnitt enthält. 
+\end{tcblisting}
+%%
+\end{NoTOCEntry}
+%%
+\subsubsection{}
+Will man auf einen solchen Abschnitt zugreifen, so kann man dieses auch weiterhin mit den üblichen Befehlen machen, d.h. mittels \cs{vref} oder \cs{cref} (siehe hierzu den \LaTeX{}-Tipp 2, \cite{latextipps2}).
+Also
+%
+\begin{tcblisting}{title=Verweise auf \cs{subsubsection} }
+siehe etwa \ref{subsubsec:test} in \vref{subsec:weiterer-abschnitt} für weitere Details zu dem Verhalten von \ldots
+\end{tcblisting}
+%
+%%
+%% Kopf- und Fußzeile
+\subsubsection{}\label{subsec:kopfzeile}
+%
+Die laufenden Kopfzeilen beinhalten die Überschrift des Hauptabschnittes und die Seitenzahl.
+In der Fußzeile befindet sich für den Entwurf, den Namen des Autors und das aktuelle Datum, sodass man dann die verschiedenen Versionen unterscheiden kann.%
+\footnote{Wer es komfortabler haben will, den bitte ich GitHub zu nutzen; siehe \href{https://github.com}{GitHub} und den entsprechenden Abschnitt in \textcite{schlosser:2016}}
+Bei der Version, die abgegeben wird, muss man  dies in der Präambel auskommentieren.
+
+%
+\begin{tcblisting}{listing only}
+%% -- für die finale Version die folgenden Zeilen auskommentieren mit % 
+\KOMAoptions{footsepline}
+\lofoot{Name}
+\cofoot{Stand der Arbeit:}
+\rofoot{\today}
+%% 
+\end{tcblisting}
+%
+%Diese Definition findet man in dem Unterverzeichnis
+%
+%\setcounter{subsection}{7} % nötig wegen obigen listing-Beispiels
+\subsection{Der Schriftsatz: \texttt{agfa-font.sty}}\label{agfa-font}
+%
+Der Schriftsatz ist eingestellt auf \enquote{Times New Roman}: 
+%%
+\begin{tcblisting}{title= Die Schrift, listing only}
+\usepackage{mathptmx}	% Times New Roman 
+	\usepackage[scaled=.90]{helvet}
+	\usepackage{courier} 
+\end{tcblisting}
+%
+In dieser Kombination sind alle mathematischen Symbole enthalten und auch passt alles gut zueinander.
+Alternativen sind die Schriftsätze \href{https://www.ctan.org/pkg/lm}{\lpkg{lmodern}} \bzw 
+\href{https://www.ctan.org/pkg/libertinus}{\lpkg{libertinus}} -- siehe hierzu \vref{subsec:preamble}.
+%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ergänzende Pakete: \texttt{agfa-pakete.sty}}\label{subsec:agfa-pakete}
+%
+Ergänzende Pakete, die sinnvoll sind, werden über die Datei
+%
+\begin{tcolorbox}
+agfa-pakete.sty
+\end{tcolorbox}
+%
+geladen.
+Bitte in dieser Datei nachsehen, welche Pakete enthalten sind.
+Die zugehörige Dokumentation findet man auf \href{https://www.ctan.org}{https://www.ctan.org} oder man kann  diese mittels des Befehls \cs{texdoc} \meta{Paketname} sich auf dem PC anzeigen lassen.
+Nützlich ist hierzu sind auch die Beschreibungen und die Beispiele zu den Paketen in \textcite{voss:2014}.
+%
+\subsection{Links und Querverweise: \texttt{agfa-hyperef.sty}}\label{subsec:agfa-hyperef}
+Dieses Paket ist wie folgt aufgebaut:
+%
+\begin{tcblisting}{title= agfa-hyperef , listing only}
+\RequirePackage{varioref}	
+\RequirePackage[breaklinks = true]{hyperref}   
+\RequirePackage{cleveref}
+\end{tcblisting}
+%
+Die Pakete \lpkg{varioref} und \lpkg{cleveref} hatte ich bereits vorgestellt und weiteres dazu findet sich in den  \LaTeX{}-Tipps \cite{latextipps2}.
+
+Die Existenz \bzw Farbe der Links wird über
+%
+\begin{tcblisting}{listing only}
+\hypersetup{
+	,colorlinks	= true    	%  Für PDF true                                                           
+	,urlcolor	= blue      	%  Farbe                                                            
+	,citecolor	= blue      	%                                                         
+	,linkcolor	= blue		%  
+	%  	,hidelinks 			% Vor dem Druck 
+							% aktivieren
+	}
+\end{tcblisting}
+%
+gesteuert.
+Bitte vor dem Druck \texttt{hidelinks} aktivieren.
+%
+\subsection{Literaturverzeichnis: \texttt{agfa-biblio.sty}}\label{subsec:agfa-biblio}
+%
+Generelles zur Verwaltung und der Ausgabe der verwendeten Literatur finden sich in den \LaTeX-Tipps \cite{latextipps6}.
+Hier ist dieses in der Datei
+%
+\begin{tcolorbox}
+agfa-biblio.sty
+\end{tcolorbox}
+%
+%enthalten, wobei der Zitierstil über \emph{numeric} gesteuert wird.		 
+%%
+%\begin{tcblisting}{listing only}
+%\usepackage[numeric]{./preamble/agfa-biblio}} 
+%\end{tcblisting}
+%%
+enthalten, wobei der Zitierstil \texttt{numeric} ist (bitte beibehalten).%
+%\footnote{Wenn man \texttt{numeric} entfernt bekommt man eine Darstellung wie etwa in \textcite{schaefer:bl}, was aber aus meiner Sicht nur für große Dokumente sinnvoll ist}
+
+Der Aufruf der Literaturdatenbank erfolgt über
+%
+\begin{tcblisting}{listing only}
+\addbibresource{agfa-bib.bib}	
+\end{tcblisting}{listing only}
+%
+(die Endung \texttt{bib} nicht vergessen) und über
+%
+\begin{tcblisting}{listing only}
+\ExecuteBibliographyOptions}{%
+	,backref		= true		% sinnvoll
+ 	,url		= true		% falls vorhanden
+ 	,doi		= false		% dito
+	,eprint		= false		% dito
+	}	
+\end{tcblisting}
+%	
+kann man noch das Verhalten steuern.
+Dabei halte ich insbesondere \texttt{backref} bei der Erstellung der Arbeit für wichtig, da nur solche Literatur in das Verzeichnis aufgenommen werden soll, das man auch tatsächlich verwendet hat.
+
+Noch eine Anmerkung: Will man die zu den zitierten Arbeiten eventuelle vorhandenen URL oder DOI Eintragungen bei den Titel hinterlegen, so kann man die Option \texttt{urldoi} angeben. 
+%%
+%\begin{tcblisting}{listing only}
+%\usepackage[numeric,urldoi]{./preamble/agfa-biblio}} 
+%\end{tcblisting}
+%%
+Dann kann man die Titel anklicken und wird direkt zu der entsprechenden Seite geführt (siehe das Literaturverzeichnis)
+Sicherlich sinnvoll bei der PDF-Variante des Dokuments, für den Druck macht es keinen Sinn. 
+
+\subsection{Eigene Dateien: Das Unterverzeichnis \texttt{./content}}\label{subsec:content}
+%
+Die eigene Dateien finden sich in dem Unterverzeichnis
+%
+\begin{tcolorbox}
+./content
+\end{tcolorbox}
+%
+Im Folgenden muss daher der jeweilige Name stets um diesen Präfix ergänzt werden.
+
+Die Titelseite ist unter
+%
+\begin{tcolorbox}
+0-AGFA-titel.tex
+\end{tcolorbox}
+%
+zu finden und ist so gestaltet, dass alle relevanten Daten enthalten sind; einfach dort entsprechend ergänzen.
+
+Des weiteren empfehle ich die Hauptabschnitte in separate Dateien auszulagern, wie ich dieses in dem Muster gemacht habe und dies via \cs{include} einzubinden, wobei man mittels \cs{includeonly} steuern kann was aktuell bearbeitet wird.
+Dieser \cs{include}-Befehl erzeugt zwar stets eine neue Seite, aber dies finde ich auch besser, selbst bei kleineren Arbeiten.
+Dies habe ich so auch in dieser Zusammenstellung gemacht, wobei bei mir die einzelnen Dateien wie folgt anfangen:
+%
+\begin{tcblisting}{title= Beispiel, listing only}
+% !TEX root = ../agfa-readme.tex
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section1 in ../agfa-readme.tex
+%% Stand: 2022/02/29
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\dictum[Uwe Seeler]{Ich bin dafür, jetzt mit der Relation erstmal im Dorf zu bleiben.} 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Die Vorlage}\label{sec:section1}
+\end{tcblisting}
+%%
+
+%
+\begin{tcblisting}{title= \cs{include} und \cs{includeonly},listing only}
+%% --- Include
+\includeonly{%
+	./content/AGFA-Section-1	,	
+%	./content/AGFA-Section-1 	
+	}
+...
+\begin{document}
+....
+% wird aufgerufen
+\include{./content/AGFA-Section-1}	
+% wird ignoriert
+\include{./content/AGFA-Section-2}	
+...
+\end{tcblisting}
+%
+In diesem Fall wird nur die Datei \emph{AGFA-Section-1.tex} eingebunden.%
+\footnote{Oder eigene eindeutige Namen vergeben}
+Hat man aber vorher eine Umwandlung mit allen Dateien gemacht, bleiben Querverweise und Nummerierungen erhalten, auch wenn man die Abschnitte separat aufruft.
+%%

@@ -1,0 +1,386 @@
+% !TEX root = ../agfa-readme.tex
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section2 in ../agfa-readme.tex
+%% Stand: 2023/01/29
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%
+\dictum[Erich Kästner]{Denkt an das fünfte Gebot: Schlagt eure Zeit nicht tot!}
+\thispagestyle{empty}
+\section{Mathematik und mehr}\label{sec:section2}
+\subsection{Aufzählungen: Das Paket \texttt{agfa-listen.sty}}\label{subsec:agfa-listen}
+%
+Mit Hilfe des Paketes \lpkg{enumitem} ist es einfach \emph{Aufzählungen} zu erstellen, die wir in 
+%
+\begin{tcolorbox}
+agfa-listen.sty
+\end{tcolorbox}
+%
+zusammengefasst und erweitert haben.
+Dazu einige Beispiele: 
+%
+\begin{tcblisting}{title= Nummerierte Listen, sidebyside }
+\begin{enumerate}[(i)]
+\item
+Erstes Item
+\item
+Zweites Item
+\item
+\ldots
+\end{enumerate}
+\end{tcblisting}
+%
+\begin{tcblisting}{title= Äquivalenzen, sidebyside }
+\begin{enumerate}[(a)]
+\item
+Erstes Item
+\item
+Zweites Item
+\item
+\ldots
+\end{enumerate}
+\end{tcblisting}
+%
+\begin{tcblisting}{title= Inline}
+\begin{enumerate*}[(1)]
+\item
+Dies ist ein Typoblindtext. 
+
+\item
+Oder manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze \enquote{Pangrams}. 
+
+\end{enumerate*}
+\end{tcblisting}
+%
+Die Erweiterungen finden sich in dem \og \TeX{}-File, etwa
+%
+\begin{docEnvironment}{myequivalent}{\oarg{options}}
+\end{docEnvironment}
+%
+Dies ist die Umgebung für äquivalente Aussagen in Theorem, Sätzen etc., wobei die Eingabe wie bei Listen üblich mit \lcmd{item} erfolgt.
+Dies eignen sich für Aufzählungen, bei denen die einzelnen Items länger sind und über mehrere Zeilen gehen.
+Mittels der Option \texttt{nosep} kann man etwa steuern, ob die Items kompakt gesetzt werden sollen (kann man immer nutzen, auch bei den ersten Beispielen).
+
+%
+\begin{dispExample*}{title=Äquivalenz}
+\begin{myequivalent}
+	\item
+	Erstes Item. 
+	\item
+	Zweites Item.
+  \begin{myequivalent}[nosep]
+		\item
+		Subitem; enger Abstand
+		\item
+		Subitem 
+  \end{myequivalent}
+	\item
+	Drittes Item.
+\end{myequivalent}
+\end{dispExample*}
+%
+oder für nummerierte Listen entsprechend
+%
+\begin{docEnvironment}
+	{myenumerate}{\oarg{options}}
+\end{docEnvironment}
+%
+Beispiel mit \texttt{myequivalent}:%
+\footnote{Solche \enquote{Textfüller} findet man mit Hilfe von \href{https://www.blindtextgenerator.de}{https://www.blindtextgenerator.de} oder den diversen Paketen, etwa \lpkg{blindtext}.}
+%
+\begin{myequivalent}
+	\item
+	Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. 
+	
+	\item
+	Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte. »Es ist ein eigentümlicher Apparat«, sagte der Offizier zu dem Forschungsreisenden und überblickte mit einem gewissermaßen bewundernden Blick den ihm doch wohlbekannten Apparat. 
+	
+	\item
+	Sie hätten noch ins Boot springen können, aber der Reisende hob ein schweres, geknotetes Tau vom Boden, drohte ihnen damit und hielt sie dadurch von dem Sprunge ab. In den letzten Jahrzehnten ist das Interesse an Hungerkünstlern sehr zurückgegangen. Aber sie überwanden sich, umdrängten den Käfig und wollten sich gar nicht fortrühren.Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich
+\end{myequivalent}
+%
+im Gegensatz zu \cs{enumerate[(a)]}
+%
+\begin{enumerate}[(a)]
+	\item
+	Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt. 
+	
+	\item
+	Und es war ihnen wie eine Bestätigung ihrer neuen Träume und guten Absichten, als am Ziele ihrer Fahrt die Tochter als erste sich erhob und ihren jungen Körper dehnte. 
+	»Es ist ein eigentümlicher Apparat«, sagte der Offizier zu dem Forschungsreisenden und überblickte mit einem gewissermaßen bewundernden Blick den ihm doch wohlbekannten Apparat. 
+	
+	\item
+	Sie hätten noch ins Boot springen können, aber der Reisende hob ein schweres, geknotetes Tau vom Boden, drohte ihnen damit und hielt sie dadurch von dem Sprunge ab. 
+	In den letzten Jahrzehnten ist das Interesse an Hungerkünstlern sehr zurückgegangen. 
+	Aber sie überwanden sich, umdrängten den Käfig und wollten sich gar nicht fortrühren.
+	Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. 
+	Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich \ldots
+	
+\end{enumerate}
+%
+\subsection{Das Paket \texttt{agfa-theorem}}\label{subsec:agfa-theorem}
+%%
+\begin{center}
+\begin{table}
+\caption{Die Theoremumgebungen}\label{table:thm-umgebung}
+\begin{tabular}{lcll}\toprule
+THM-Umgebung	&   & Ersetzung dtsch. & Ersetzung engl. \\ \hline 
+\multicolumn{3}{c}{Mit Rahmen:}\\ 
+theorem oder thm 	&   & Theorem \\
+proposition	oder prop	&   & Satz & Proposition \\ 
+lemma	&   & Lemma \\ 
+corollary oder cor	&   & Korollar & Corollary \\ 
+\multicolumn{3}{c}{{Immer ohne Rahmen: } }\\ 
+definition	oder defn &   & Definition \\
+remark oder rem &   & Anmerkung & Remark \\
+proof	&   & Beweis & Proof \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{center}
+
+%
+\begin{docEnvironment}{THM-Umgebung}{}
+\end{docEnvironment}
+%
+
+In diesem Paket finden sich die Umgebungen für Theoreme, Lemmata, Korollare \etc und man kann mittels der Option \texttt{thmframed} wählen, ob man einen Teil dieser Umgebungen eingerahmt haben will, was manchmal etwas Auflockerung in die mathematische Darstellung bringt.
+Wählt man Englisch als Sprache, so wird dies entsprechend berücksichtigt.
+Das Setzen der Umgebungen ist also immer gleich, man muss dem System nur sagen, was man will, \dh man ersetzt \texttt{THM-Umgebung} durch die entsprechende Definition (siehe \vref{table:thm-umgebung}). 
+
+\begin{tcblisting}{title= Umgebung für Theoreme}
+%
+\begin{theorem}\label{thm:theorem}
+Stets ist $ \int_{ 0 }^{ 1 } f(s) \ds \neq 0 $ für eine stetige positive Funktion $ \neq 0 $.
+\end{theorem}
+%
+\begin{corollary}\label{cor:folgerung}
+Stets ist $ f \mapsto \int_{ 0 }^{ 1 } \abs{ f(s) }\ds $ eine Norm auf dem Vektorraum 
+$ C\interval{0,1} $.
+\end{corollary}
+%
+\end{tcblisting}
+%
+und mittels den üblichen Befehlen (siehe das entsprechende \LaTeX{}-Tipps dazu) kann man darauf verweisen:
+%
+\begin{tcblisting}{title=Querverweis} 
+Wir verweisen auf \vref{thm:theorem} ...
+\end{tcblisting}
+%
+%%
+%Für eine englische Variante also:
+%%
+%\begin{otherlanguage}{english}
+%\begin{tcblisting}{title = Englische Umgebungen} 
+%\begin{proposition}\label{prop:proposition}
+%\ldots  $ \int_{ 0 }^{ 1 } f(s) \ds \neq 0 $ \ldots $ \neq 0 $.
+%\end{proposition}
+%%
+%\begin{corollary}\label{cor:corollary}
+%\ldots $ f \mapsto \int_{ 0 }^{ 1 } \abs{ f(s) }\ds $ defines a norm on  
+%$ C\interval{0,1} $.
+%\end{corollary}
+%\end{tcblisting}
+%\end{otherlanguage}
+%
+\subsection{Einige Abkürzungen: \texttt{agfa-defn}}\label{agfa-defn}
+In dem Paket \texttt{agfa-defn} habe ich einige Abkürzungen eingestellt, die aus meiner Sicht nützlich sind und die Eingabe von \TeX\ erleichtert.
+Diese habe ich hier nicht weiter im Detail aufgeführt, aber ein Blick in dieses Datei ist sicherlich nützlich.
+
+Vorab noch eine Anmerkung zur Eingabe eines mathematischen Textes: Auch hierfür gelten einige typographische Regeln, die zu beachten sind.
+Eine Kurzfassung findet man etwa in \textcite{nadler:formelsatz}, in \textcite[Kap. 9.1]{voss:2012a} und ausführlicher, versehen mit vielen Beispielen in \href{https://archiv.dante.de/DTK/PDF/komoedie_1997_1.pdf}{Marion Neubauer: \emph{Feinheiten bei wissenschaftlichen PublikationenPublikationen}}.%
+\footnote{Der Link ist hinterlegt und der Artikel findet sich ab Seite 25 und der zugehörige erste Teil \href{https://archiv.dante.de/DTK/PDF/komoedie_1996_4.pdf}{findet sich hier}}
+
+In \vref{tab:definitionen} finden sich einig Beispiele dazu.
+Den Rest bitte in der Datei \texttt{agfa-defn.sty} nachsehen.
+Falls mal ein mittels \cs{newcommand} definierter eigener Befehl nicht klappt (\ldots bereits definiert), dann unbedingt reinsehen.
+
+Noch ein Hinweis: Ich habe die \cs{var}-Varianten \enquote{umgetauft}: also \cs{phi} gibt $ \phi $ und \cs{varphi} gibt $ \varphi $. 
+Entsprechend auch bei den anderen aufgeführten Zeichensätze, die eine \cs{var}-Variante haben. 
+%
+\begin{table}
+\begin{tabular}{l  >{$}l<{$} l l  >{$}l<{$} l}
+\cs{N}	&	\N 	& 		& 	\cs{phi} 			& 		\phi 		&  	\\
+\cs{Z}	&   \Z	&	   	& 	\cs{psi}			&      	\psi  			\\
+\cs{Q}	&   \Q 	&		&	\cs{epsilon}		&       \epsilon    	\\
+\cs{R}	&	\R	&		&	\cs{rho}			&	 	\rho 			\\
+\cs{C}	&	\C	&		&	\cs{theta}			&	 	\theta			\\
+\cs{P} 	&	\P	& Potenzmenge	& \cs{geq}		&	 	\geq 			\\
+\cs{diff}\brackets{\cs{mu}}	& \diff{\mu}  &	& \cs{leq}	&	 	\leq  \\
+\cs{dt}	&	\dt &	Eulersche Zahl		& 	\cs{eu} 	& \eu  &    \\
+\cs{ds} & 	\ds	& 	Imaginäre Einheit	&	\cs{im}	& \im &  \\
+\cs{e}  &  \e &&&&\\ \hline 
+\cs{finv}\marg{arg}	& \finv{arg} & Inverse Mengenfunktion & etwa & \finv{g}(A) \\
+\cs{Kern}\marg{arg}	& \Kern{arg}  & Kern & etwa & \Kern{T} \\
+\cs{Bild}\marg{arg}	& \Bild{arg} & Bild  & etwa & \Bild{T}\\
+\cs{Fix}\marg{arg}& \Fix{arg} & Fixraum & etwa & \Fix{T}\\ 
+%\cs{Sp}\marg{arg} & \Sp{arg}  & Spektrum & etwa & \Sp{T} \\
+\end{tabular} 
+\caption{Einige Abkürzungen aus \texttt{agfa-defn}}\label{tab:definitionen}
+\end{table} 
+%\begin{table}[!htb] 
+%\ttabbox[0.5\linewidth]%
+%{\begin{subfloatrow}[2]
+%	\ttabbox[\FBwidth]{\caption{\cs{var}\ldots}\label{subtab:tab1}}%[\FBwidth]
+%	{\begin{tabular}{l  >{$}l<{$} }%\hline 
+%	\cs{phi}	\footnote{Wer aber $ \varphi $ unbedingt haben will: \cs{varphi} eingeben (analog für die anderen griechischen Buchstaben).}		&      \phi   		\\
+%	\cs{psi}			&      \psi   		\\
+%	\cs{epsilon}		&       \epsilon    \\
+%	\cs{rho}			&	 	\rho 		\\
+%	\cs{theta}		&	 	\theta		\\
+%	\cs{geq}			&	 	\geq 		\\
+%	\cs{leq}			&	 	\leq 		\\ %\hline
+%	\end{tabular}}
+%%
+%	\ttabbox[\Xhsize]{\caption{Zahlen etc}\label{subtab:tab2}}%[\Xhsize]
+%	{\begin{tabular}{l  >{$}l<{$} }%\hline 
+%	\cs{N}	&	    \N   \\
+%	\cs{Z}	&	    \Z   \\
+%	\cs{Q}	&	    \Q   \\
+%	\cs{R}	&	    \R   \\
+%	\cs{C}	&	    \C   \\ % \hline 
+%	\cs{1}	&		\1	\footnote{Eins einer Algebra} \\
+%	\end{tabular}}
+%%
+%\end{subfloatrow}}
+%{\caption{Erste Definitionen}\label{tab:erste-def}}
+%\end{table}
+%%
+%\begin{table}[!htb] 
+%\ttabbox[0.5\linewidth]%
+%{\begin{subfloatrow}[2]
+%	\ttabbox[\FBwidth]{\caption{Diff, \ldots}\label{subtab:tab3}}%
+%	{\begin{tabular}{l  >{$}l<{$} l}
+%	\cs{diff}\brackets{\cs{mu}}	 &	    \diff{\mu}  &  \\
+%	\cs{dt}, \cs{ds}, \ldots 	 &	    \dt, \ds, \ldots  & \\
+%	\cs{e}					& \e  & Eulersche Zahl	   \\
+%	\cs{im}					& \im & Imaginäre Einheit \\
+%	\cs{P} 					& \P & Potenzmengensymbol \\
+%	\end{tabular}}
+%%
+%	\ttabbox[\Xhsize]{\caption{Sonstiges}\label{subtab:tab4}}
+%	{\begin{tabular}{l  >{$}l<{$} l}
+%	\cs{finv}\brackets{f}	& \finv{f}(A) & Inverse Mengenfunktion \\
+%	\cs{Kern}	& \Kern{T}  & Kern \\
+%	\cs{Bild}	& \Bild{T} & Bild  \\
+%	\cs{Fix}		& \Fix{T} & Fixraum \\
+%	\end{tabular}}
+%
+%\end{subfloatrow}}
+%{\caption{Weitere Definitionen}\label{tab:zweite-def}}
+%\end{table}
+%
+\subsection{Definitionen in \texttt{agfa-mathtools.sty}}\label{agfa-mathtools}
+In dieser Datei befinden sich Tools auf Basis das Pakets \lpkg{mathtools}.
+%
+\minisec{Norm: }
+\begin{docCommands}[%
+% 	,doc description = Norm
+	,doc parameter = \marg{MathSymbol}
+	,doc name = norm	] 
+	{%
+	,doc name = norm*}	
+\end{docCommands}
+%
+Setzt \meta{MathSymbol} $ x $ in Normzeichen: $ \norm{x} $, wobei die Sternvariante die Länge der Norm an die Umgebung anpasst.
+%%
+\begin{dispExample*}{title= Beispiel für die Norm}
+\ldots $ \norm{} $: So bezeichnet etwa  $ \norm{x} $ die Norm von $ x $ und die Sternvariante passt alles in der Größe an: 
+%
+\[
+	\norm*{\frac{ 1 }{ 1 + t^{ 2 } } }
+\]
+%
+\end{dispExample*}
+
+\minisec{Absolutbetrag: }
+%
+\begin{docCommands}[%
+%	,doc description = Absolutbetrag
+	,doc parameter = \marg{MathSymbol}
+	,doc name = abs
+	] {
+		,{ }
+		,doc name = abs*}	
+\end{docCommands}
+%
+Setzt \meta{MathSymbol} in beidseitige Betragsstriche $ \abs{\text{\meta{MathSymbol}}} $, wobei die Sternvariante die Länge der Betragsstiche anpasst.
+
+%
+\begin{dispExample*}{title= Beispiel für den Absolutbetrag }
+Text $ \int_{ \R } \abs{f(t)} \dt $ Text \ldots
+%
+\[
+	g(t) = \abs*{\frac{ 1 }{ 1 - t^{ 2 } } } \, , \quad t \in \R \, .
+\]
+%
+\end{dispExample*}
+%
+\minisec{Intervalle: }
+
+\begin{center}
+\begin{tabular}{l  l >{$} l <{$}}
+\docAuxCommand{interval\brackets{a,b}} 	& abgeschlossenes Intervall 
+					&   \interval{ a,b}    	\\
+\docAuxCommand{ointerval\brackets{a,b}}: 	& offenes Intervall 
+					&   \ointerval{a,b}   	\\ 
+\docAuxCommand{rointerval\brackets{a,b}}: 	& rechts offenes Intervall 
+					&   \rointerval{a,b}  	\\ 
+\docAuxCommand{lointerval\brackets{a,b}}: &  links offenes Intervall 
+					&   \lointerval{a,b}   	
+\end{tabular}
+\end{center}
+
+
+\begin{dispExample*}{title= Beispiel für die Intervalle}
+\ldots es ist $ \int_{-1}^{1} \abs{f(t)} \dt $ das Integral der Funktion $ f $ auf dem Intervall $ \interval{-1,1} $ \ldots
+
+Aber existiert auch das Integral der Funktion $ g $ mit
+%
+\[
+	g(t) = \abs*{\frac{1}{1 - t^{ 2 }}} \, , \quad t \in \ointerval{-1,1 } \, .
+\]
+%
+\end{dispExample*}
+%%
+\minisec{Einfachere Eingabe von Klammern \etc}
+Will man etwa Klammern \enquote{ ( \ldots ) } der Größe an dem anpassen, was zwischen ihnen steht, muss man gewöhnlich mit \cs{big\ldots} arbeiten. 
+Dies kann man sich ersparen, da ein Macro eingearbeitet ist, dass einem diese Arbeit erspart. 
+%
+\begin{dispExample*}{title=Ein Beispiel}
+Also 
+%
+\[
+( \frac{1}{1 - \sum_{j=1}^{n}r_{j}} )
+\]
+%
+oder
+%
+\[
+\left] \frac{1}{1 - \sum_{j=1}^{n}r_{j}} \right]
+\]
+%
+\bzw
+%
+\[
+\lointerval{ \frac{1}{1 - \sum_{j=1}^{n}r_{j}} } 
+\]
+%
+eingeben; wie es aussieht sieht man unten.
+\end{dispExample*}
+%
+\minisec{Weitere Tools: }
+Der Ausdruck $ 1/2 $ in einem Fließtext ist nicht schön aber $ \nfrac{1}{2} $ ist es schon. 
+Ebenso ist $ \tfrac{E}{F} $ besser als E/F. 
+Es ist $ \interior{A} $ ist das Innere einer Menge eines topologischen Raums.
+Eine Übersicht ist in der folgenden Tabelle enthalten.
+%
+\begin{center}
+\begin{tabular}{l  l l }
+\docAuxCommand{tfrac\brackets{E}\brackets{F}} 	&   &   \tfrac{E}{F}   	\\
+\docAuxCommand{nfrac\brackets{a}\brackets{b}} 	&   &   $ \nfrac{a}{b} $	 \\
+\docAuxCommand{interior\brackets{A}}  	&   &   $ \interior{A} $	 \\ 	
+\end{tabular}
+\end{center}
+
+Und immer daran denken: $ \dfrac{ \pi }{ 2 } $ geht nur so  und nicht so $ \pi/2 $.
+%%
+

@@ -1,0 +1,241 @@
+% !TEX root = ../SEM-ReadMe.tex
+%% -----------------------------
+%% Stand: 2023/01/27
+%% -----------------------------
+\section{Die Muster \TeX{}-Datei}
+\subsection{Die Vorlagen}
+Ich habe vier Dateien erstellt:
+
+\begin{myitemize}
+	
+	\item
+	\texttt{SEM-Muster.tex}: Diese dient als Vorlage für kleinere Ausarbeitungen, etwa für eine Hausarbeit oder für den Vortrag eines Proseminars oder eines Seminars. 
+		Man darf nur diese Datei mit dem \LaTeX{}-Compiler bearbeiten. 
+		Die anderen sind sog.\@ \texttt{include}-Dateien, die Makros enthalten.
+		
+	\item
+	\texttt{SEM-Beamer.tex}: Eine Datei, mit der Sie sicherlich Ihren Vortrag mal konzipieren können.
+	Einfach mal reinschauen.
+	
+	\item
+	Im Unterverzeichnis \texttt{preamble} befinden sich:
+	
+	\begin{myenumerate}
+
+	\item
+	\texttt{SEM-art.tex}: Beinhaltet das Layout, einige Definitionen für mathematische Umgebungen etc.\@ 
+	Details werden in \vref{tab:mathematisches} besprochen.. 
+	
+	\item
+	\texttt{SEM-defn.tex}: Beinhaltet einige Definitionen für Abkürzungen \etc, siehe \vref{tab:generelles}.
+	
+	\item
+	Für eigene Definitionen bitte die Datei \texttt{My-defn.tex} nutzen aber vorher in die beiden \og reinschauen, was wie definiert ist \bzw wird. 
+	
+	\end{myenumerate}
+	
+	diese werden via \cs{input}\brackets{name-der-datei} eingebunden.
+	
+	\item
+	Im Unterverzeichnis \texttt{content} befinden sich die Dateien mit dem fachlichen Inhalt, die ebenso über \cs{input}\brackets{name-der-datei} eingebunden werden.
+	In unserem Fall \texttt{./ug-Master.tex} unsere Ausführungen und ale weiteres Beispiel \texttt{./MeinText.tex}, in dem man seine eigenen Ausführungen eintragen kann (oder jeder andere Namen für die vorhandene Datei).
+		
+\end{myitemize}
+
+Man kann den Inhalt von \texttt{./preamble} auch in das  \texttt{texmf}-Verzeichnis unter \texttt{latex} kopieren; dann hat man alles stets zur Verfügung.
+Falls der Sinn des \texttt{texmf}-Verzeichnises nicht bekannt ist: Einfach \href{https://www.overleaf.com/learn/latex/Articles/An_introduction_to_Kpathsea_and_how_TeX_engines_search_for_files
+\%23Table_listing_Kpathsea_.E2.80.9Cconfig_variables.E2.80.9D}{mal diese Übersicht dazu lesen}.
+\begin{remark}
+Ein Hinweis für Mac-User: Nach der Installation von \TeX{} gibt es unter \texttt{$\tilde{}$/Library} ein Unterverzeichnis \texttt{texmf/tex/latex}.
+Dort gehören die beiden letzten Dateien hin und werden von \LaTeX{} gefunden.
+
+Für Windows-Nutzer: Bitte unbedingt \href{http://texlive.tug.org/texlive/}{texlive} nutzen und \href{http://texlive.tug.org/texlive/windows.html}{die Anleitung lesen}.
+\end{remark}
+%
+\begin{remark}
+Für die Nutzer von Overleaf: Bitte über \texttt{Code} rechts oben die zip-File herunterladen und als neues Projekt nach Overleaf kopieren. 
+Es wird dann ein Verzeichnis mit dem gleichen Namen angelegt und man kann die Dateien ohne weiteren Installationsaufwand nutzen.
+\end{remark}
+% ------------------
+\subsection{Die Definitionen}\label{subsec:definitionen}
+Folgendes ist vordefiniert und findet sich in der \texttt{SEM-defn.tex} Datei.%
+\footnote{Die folgenden Tabellen sind mit dem Paket \texttt{longtable} \cite{longtable} gesetzt worden. 
+Details hierzu findet man in dem \og Manual oder in \textcite{voss:2012a}.}
+% ------------------------------------------------------------------------------
+\begin{center}
+  \begin{longtable}{@{} lcl @{}}
+  \caption{Generelles}\label{tab:generelles} \\
+%-
+  \toprule
+  Die Eingabe & ergibt die  & folgende Ausgabe \\ 
+  \toprule
+  \endfirsthead  
+%-
+  \multicolumn{3}{@{}l}{\small\ldots\emph{Fortsetzung}} \\
+  \toprule
+  Die Eingabe & ergibt die  & folgende Ausgabe \\ 
+  \toprule
+  \endhead
+%-
+  \multicolumn{3}{@{}r}{\small{\emph{Fortsetzung nächste Seite}}\ldots} \\
+  \endfoot
+  \endlastfoot
+% ------------------------------------------------------------------------------
+    \emph{Anführungszeichen:} \\
+    \verb|\enquote{Text}| & $ \to $ & \enquote{Text} \\ 
+    \verb|\enquote{\ldots\enquote{Text}\ldots}| & $ \to $ & \enquote{\ldots\enquote{Text}\ldots} \\ 
+    \midrule 
+    \emph{Abkürzungen:} \\
+    \verb|\zB| & $ \to $ & \zB \\ 
+    \verb|\dh| & $ \to $ & \dh \\
+     \verb|\og| & $ \to $ & \og \\
+    \verb|\etc| & $ \to $ & \etc \\
+    \verb|\bzw| & $ \to $ & \bzw \\
+    \midrule
+    \emph{Bindestriche:} \\
+    \verb|-| & $ \to $ & Cauchy-Schwarz \\
+    \verb|--| & $ \to $ & 1--10 \\
+    \verb|$ - x $ | & $ \to $ & $ - x $ \\
+%    \verb|$ - x $\) $| & $ \to $ & \( - x \) \\
+% ------------------------------------------------------------------------------
+    \bottomrule
+  \end{longtable}
+\end{center}
+% 
+\begin{remark}
+Bei den Abkürzungen muss nach dem ersten Punkt einer kleiner Abstand eingehalten werden (laut Duden).
+Dies ist hier eingehalten worden.
+\end{remark}
+
+%
+\begin{center}
+  \begin{longtable}{@{} lcl @{}}
+  \caption{Mathematisches}\label{tab:mathematisches} \\
+%-
+  \toprule
+  Die Eingabe & ergibt die  & folgende Ausgabe \\ 
+  \toprule
+  \endfirsthead  
+%-
+  \multicolumn{3}{@{}l}{\small\ldots\emph{Fortsetzung}} \\
+  \toprule
+  Die Eingabe & ergibt die  & folgende Ausgabe \\ 
+  \toprule
+  \endhead
+%-
+  \multicolumn{3}{@{}r}{\small{\emph{Fortsetzung nächste Seite}}\ldots} \\
+  \endfoot
+  \endlastfoot
+%% -----------------------------------------------
+    \emph{Zahlenmengen:} \\
+    \verb| \N | & $ \to $ & $ \N $ \\ 
+    \verb| \Z | & $ \to $ & $ \Z $ \\
+    \verb| \Q | & $ \to $ & $ \Q $ \\
+    \verb| \R | & $ \to $ & $ \R $ \\
+    \verb| \C | & $ \to $ & $ \C $ \\
+    \verb| \K | & $ \to $ & $ \K $ \\
+	\midrule
+	\emph{Integral:} \\
+    \verb| \ds | & $ \to $ & $ \ds $ \\
+    \verb| \dt | & $ \to $ & $ \dt $ \\
+    \verb| \dx | & $ \to $ & $ \dx $ \\
+    \verb| \diff{\mu} | & $ \to $ & $ \diff{\mu} $ \\
+    \verb| \d{\mu} | & $ \to $ & $ \diff{\mu} $ \\
+	\midrule
+	\emph{Variable:} \\
+    \verb| \phi | & $ \to $ & $ \phi $ \\
+    \verb| \epsilon  | & $ \to $ & $ \epsilon $ \\
+    \verb| \rho | & $ \to $ & $ \rho $ \\
+	\verb| \theta | & $ \to $ & $ \theta $ \\
+	\verb| \leq | & $ \to $ & $ \leq $ \\
+	\verb| \geq | & $ \to $ & $ \geq $ \\
+	\midrule
+	\emph{Sonstiges: } \\
+	\verb| \abs{x} | & $ \to $ & $ \abs{x} $ \\
+	\verb| \abs{} | & $ \to $ & $ \abs{} $ \\
+	\verb| \norm{x} | & $ \to $ & $ \norm{x} $ \\
+	\verb| \norm{} | & $ \to $ & $ \norm{} $ \\
+	\verb| \norm*{\sum} | & $ \to $ & $ \norm*{\sum} $ \\
+	\midrule
+	\verb| \interval{a,b}}| & $ \to $ & $ \interval{a,b}  $ \\
+	\verb| \rointerval{a,b}}| & $ \to $ & $ \rointerval{a,b}  $ \\
+	\verb| \lointerval{a,b}}| & $ \to $ & $ \lointerval{a,b}  $ \\
+	\verb| \ointerval{a,b}}| & $ \to $ & $ \ointerval{a,b}  $ \\
+% -----------------------------------------------
+    \bottomrule
+  \end{longtable}
+\end{center}
+%%
+\begin{remark}
+Kleine Anmerkung: Mittels der Eingabe der Sternvariante von \cs{abs} oder \cs{norm} sich die Größe der Begrenzungen an den folgenden Text an.
+Etwa
+%
+\begin{tcblisting}{}
+%
+\[
+	\abs*{ \frac{1}{\frac{a}{b+c}} }
+\]
+%
+oder
+%
+\[
+	\norm*{ \frac{1}{\frac{a}{b+c}} }
+\]
+%
+\end{tcblisting}
+\end{remark}
+%%
+Für die mathematischen Umgebungen stehen folgende Abkürzungen zur Verfügung:
+\begin{center}
+  \begin{longtable}{@{} lcl @{}}
+  \caption{Mathematische Umgebungen}\label{tab:ma-umgebungen} \\
+%-
+  \toprule
+  Die Eingabe & ergibt die  & folgende Umgebung \\ 
+  \toprule
+  \endfirsthead  
+%-
+  \multicolumn{3}{@{}l}{\small\ldots\emph{Fortsetzung}} \\
+  \toprule
+  Der Schlüssel \emph{key} & ergibt die  & folgende Umgebung \\ 
+  \toprule
+  \endhead
+%-
+  \multicolumn{3}{@{}r}{\small{\emph{Fortsetzung nächste Seite}}\ldots} \\
+  \endfoot
+  \endlastfoot
+% ------------------------------------------------------------------------------
+    \texttt{theorem} oder \texttt{thm} & $ \to $ & Theorem \\ 
+    \texttt{prop}, \texttt{proposition} oder \texttt{satz} & $ \to $ & Satz \\
+    \texttt{cor}, \texttt{corollary} oder \texttt{korollar} & $ \to $ & Korollar \\
+    \texttt{lem} oder \texttt{lemma} & $ \to $ & Lemma \\
+	\texttt{defn} oder \texttt{definition} & $ \to $ & Definition \\
+	\texttt{examp}, \texttt{beispiel} oder \texttt{example} & $ \to $ & Beispiel \\
+	\texttt{rem} oder \texttt{note} & $ \to $ & Anmerkung \\
+% ------------------------------------------------------------------------------
+    \bottomrule
+  \end{longtable}
+\end{center}
+%
+\begin{tcblisting}{title= Ein Beispiel}
+\begin{theorem}
+\ldots
+\end{theorem}
+\end{tcblisting}
+%
+\subsection{Wo bekommt man Hilfe?}
+%
+Bei der Nutzung des Systems wird man immer wieder auf Probleme stoßen.
+Vieles wird man selbst lösen können, da es sich meistens um Eingabefehler handelt.
+Kommt man aber nicht weiter, so gibt es verschiedene Webseiten, auf denen man Hilfe bekommt
+
+\begin{itemize}
+\item
+Für alle möglichen Fragen, Installation \ua: \url{http://projekte.dante.de/DanteFAQ/WebHome}
+\item
+Für technische Probleme: \url{https://tex.stackexchange.com}
+
+\end{itemize}
+
+Und dann kann noch Google nutzen -- aber Achtung: Nicht alles, was man dann findet ist sinnvoll.
+Hier sollte man auf das Datum der Frage achten. 

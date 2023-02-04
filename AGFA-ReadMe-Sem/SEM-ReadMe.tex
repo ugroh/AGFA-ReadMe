@@ -1,0 +1,139 @@
+% !TEX TS-program = pdflatexmk
+% !TEX encoding = UTF-8 Unicode
+% -------------------------- 
+%  
+%  SEM-ReadMe.tex : Alles, was man wissen sollte
+%  Stand:	2023/01/27   
+% 
+% --------------------------
+\documentclass[%
+	,ngerman
+%	,fontsize		= 12pt
+	,DIV			= calc 
+	,toc			= bib
+	,abstract		= true
+	,parskip			= half+
+%	,mydina4
+		]{scrartcl}
+
+%% -- Nutze die AGFA-Pakete
+%% --
+\usepackage[numeric,urldoi]{agfa-art}
+
+%% -- Literatur
+%% --
+\addbibresource{CTAN.bib}
+\addbibresource{TeX.bib}
+\addbibresource{Artikel.bib}
+\addbibresource{Buecher.bib}
+%
+\ExecuteBibliographyOptions{%
+	,backref		= true		 	
+	,url		= true	 	
+	,doi		= false		
+	,eprint		= false		
+	}
+
+%% -- Links farbig
+%% --
+
+\hypersetup{
+	,colorlinks	= true    			%                                             
+	,urlcolor	= blue       		%                                                              
+	,citecolor	= blue      		    %                                                          
+	,linkcolor	= blue			 	%  
+%  	,hidelinks 						%  
+	}
+	
+%% -- Titelseite
+%% --
+\title{Die Vorlage \texttt{SEM-Master.tex}}
+\subtitle{-Erläuterungen-}
+\date{\today}
+\author{U. Groh}
+
+%% -- Inhaltsverzeichnis kompremiert
+%% --
+%\RedeclareSectionCommands[tocraggedpagenumber,toclinefill={}]{section,subsection}
+\RedeclareSectionCommands[tocraggedpagenumber]{section,subsection}
+\BeforeStartingTOC[toc]{\begin{multicols}{2}}
+\AfterStartingTOC[toc]{\end{multicols}}
+
+%% -- Für Listings etc.
+%% --
+\usepackage{ug-listings}
+
+%\usepackage{2up}
+
+%\targetlayout{booklet}
+
+%% -- Start des Dokuments
+%% --	
+\begin{document}
+
+%% -- Titel inkl. Abstract und Dictum
+
+\maketitle
+\tableofcontents
+\thispagestyle{empty}
+
+\dictum[\href{https://de.wikipedia.org/wiki/Friedrich_Dürrenmatt}{F. Dürrenmatt}]{Das Rationale am Menschen sind seine Einsichten, das Irrationale, dass er nicht danach handelt.}
+%%
+\begin{abstract}
+Dies ist eine kleine Übersicht zu \TeX{}, der Nutzung von \LaTeX{} und Erläuterungen zu den Vorlagen.
+Dies ist \enquote{keine} fehlerfreie Ausarbeitung und sie kann nur für einen ersten Einstieg sinnvoll sein.
+Gern helfe ich aber, wenn es Probleme damit oder es Fragen zur Nutzung von \LaTeX{} gibt.
+\end{abstract}
+
+%% -- SEM-ReadMe-1.tex
+%% --
+\input{./content/SEM-ReadMe-1}
+
+%% -- SEM-ReadMe-2.tex
+%% --
+\input{./content/SEM-ReadMe-2}
+
+%% -- SEM-ReadMe-3.tex
+%% --
+\input{./content/SEM-ReadMe-3}
+
+
+% --------------------------
+% \setcounter{unbalance}{5}		
+\nocite{voss:2012a,lamport:1986}
+\printbibliography
+%\end{multicols}
+%
+\end{document}
+
+1.3 Was ist denn nun LaTeX (und muss ich das wissen)?
+
+LaTeX ist ein System zur Erstellung von Texten, das von Leslie Lamport entworfen wurde.Die Information in diesem Abschnitt basiert auf den Angaben in dem Buch „A Guide to LaTeX2ε“ von Helmut Kopka und Patrick Daly. Die genaue Quellenangabe finden Sie im Literaturverzeichnis des Benutzerhandbuches. Es basiert auf der Textsatz-Sprache TeX, die bereits Mitte der 70er Jahre von Donald Knuth entwickelt wurde. „TeX“ spricht man aus wie „Blech“, und manche halten es auch für etwas blechern. Das liegt aber daran, dass die wenigsten verstehen, was TeX eigentlich ist. TeX liest aus einer ASCII-Datei eine Reihe von Textsatzbefehlen und führt sie aus. Das ist etwas komplizierter als eine Schreibmaschine, aber bei weitem nicht so schwierig wie eine echte Schriftsatz-Maschine in einer Druckerei. Aber viele der Tricks der Schriftsetzer wurden von Knuth als Computer-Algorithmen formuliert und in TeX integriert, daher sehen seine Druckergebnisse so hervorragend aus. TeX erzeugt als Ausgabe eine Datei, die man als geräteunabhängig („device independent“, DVI) bezeichnet. Eine solche DVI-Datei kann von vielen Programmen, die dieses Format verstehen, gelesen und in andere Formate wie zum Beispiel PostScript oder PDF umgewandelt werden.
+
+Wäre das bereits alles, TeX wäre nichts anderes als ein primitiver Textsetzer. Aber in TeX ist es möglich, eigene Befehlssequenzen, so genannte Makros, zu definieren. Und dadurch sind die Möglichkeiten von TeX schier unbegrenzt.
+
+Leslie Lamports Idee
+
+Die meisten Leute, die TeX verwenden, benutzen tatsächlich ein Makropaket, das Knuth zusammengestellt hat, um den Großteil der Details beim Zeichensatz vor dem Anwender zu verstecken. Dieses Makropaket ist meist gemeint, wenn man von TeX spricht. Das eigentliche TeX mit seinen expliziten Satzbefehlen benutzt kaum ein normaler Anwender, das machen nur diejenigen Leute, die selber Makropakete entwickeln. Und hier kommt Leslie Lamport ins Spiel. Er wollte ein Makropaket, das sich näher am Benutzer orientiert, und nicht an den Feinheiten beim Textsatz. Ein Paket, mit dem sich einfach Dinge wie Abschnitte, Tabellen oder mathematische Formeln schreiben lassen, ohne zu verwirrend zu sein. So wurde LaTeX geboren. 
+
+Parallel zur Weiterentwicklung von LaTeX entstanden andere, spezielle Pakete für TeX: Eines, um Folien zu schreiben oder eines, um Artikel für mathematische Zeitschriften zu erstellen, und so fort. Einige der Autoren verwendeten dazu TeX, andere begannen, LaTeX abzuändern. Um dieses Wirrwarr zu vereinfachen, begann eine Gruppe von LaTeX-Experten (zu denen natürlich auch Lamport selbst gehörte) in den späten 80er Jahren, LaTeX2ε zu entwickeln, die heutige Version von LaTeX. Diese neue Version stellt auch Befehle zur Verfügung, um neue Makros einfach zu erstellen, andere Zeichensätze zu definieren und so weiter. Alles in allem ist LaTeX dadurch selber eine ziemlich umfangreiche Sprache geworden. Überall auf der Welt haben Benutzer ihre eigenen Erweiterungen für LaTeX geschrieben.
+
+Klassen und Stile
+
+Es existieren zwei unterschiedliche Wege, wie man LaTeX erweitern kann: Klassen und Stile. Eine Klasse besteht aus einer Reihe von LaTeX- (und TeX-) Makros, die eine neue Art von Dokument beschreiben, wie etwa ein Buch oder einen Artikel. Es gibt zum Beispiel Klassen für Folien, für Artikel in mathematischen oder physikalischen Zeitschriften… Viele Universitäten haben sogar eigene Klassen für ihre Dissertationen zusammengestellt! Im Gegensatz dazu definiert ein Stil keine neue Art von Dokument, sondern eine anderes Verhalten, das ein Dokument nutzen kann.
+
+So nutzt LyX zwei unterschiedliche Stil-Dateien, um die Ränder und Zeilenabstände in den Dokumenten festzulegen. Es existieren Stil-Dateien für fast jeden denkbaren Zweck: Um Etiketten und Umschläge zu beschriften, den Texteinzug zu verändern, um Grafikdateien handhaben zu können, spezielle Kopf- und Fußzeilen zu erstellen, Literaturlisten den eigenen Wünschen anzupassen, Erscheinungsbild und Position von Fußnoten, Tabellen und Abbildungen zu verändern und so weiter und so fort. Hier eine kurze Zusammenfassung:
+
+00.00.0000 TeX: Makrofähige Programmiersprache für Schriftsatz.
+
+00.00.0000 LaTeX: Makropaket auf der Basis von TeX.
+
+00.00.0000 Klasse: Beschreibung eines Dokumententyps, verwendet LaTeX. 
+
+00.00.0000 Stil: Verändert die Standardeinstellungen von LaTeX. 
+
+00.00.0000 LyX: Visuelle WYSIWYM-Textverarbeitung, die LaTeX mit all seinen Fähigkeiten zum Ausdruck verwendet.
+
+Der Zweck dieses Abschnittes war es, Ihnen zu zeigen, warum LyX etwas anders arbeitet als andere Textverarbeitungen. Der Grund ist einfach: LyX verwendet LaTeX als Formatierprogramm für den Ausdruck. Wie auch LaTeX konzentriert sich LyX auf den Inhalt Ihres Textes — also was Sie schreiben. Der Rechner kümmert sich dann darum, dass es gut aussieht.
+
+Ach ja — eine letzte Bemerkung. LaTeX spricht man aus wie TeX, das sich auf das Wort Blech reimt. Laut Lamport kann man LaTeX auch „Läitech“ aussprechen. Wer es so ausspricht wie das Material, aus dem Kondome hergestellt werden, spricht es falsch. LyX dagegen spricht man „Lücks“. Oder „Licks“ — je nachdem, aus welchem Land man stammt.

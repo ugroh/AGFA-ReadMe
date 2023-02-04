@@ -1,0 +1,135 @@
+% !TEX root = ../SEM-ReadMe.tex
+%% -----------------------------
+%% Stand: 2023/01/27
+%% -----------------------------
+\section{Etwas zu \LaTeX{}}
+Um den Einstieg in \LaTeX{} etwas zu erleichtern, sind im Folgenden einige Punkte zusammengestellt, die für die ersten Schritte nützlich sind. 
+Alles, was blau markiert ist, ist mit Links auf weiterführende Informationen hinterlegt.
+Des Weiteren habe ich in einige \LaTeX{}-Tipps separat erstellt, die einiges vertiefen, was ich hier nur kurz anspreche -- diese finden sich auf ILIAS.
+
+% 
+\subsection{Was ist \LaTeX{}}
+%\subsubsection{}
+\LaTeX{} ist eine \href{https://de.wikipedia.org/wiki/Auszeichnungssprache}{Markup-Sprache}, die auf dem \href{https://de.wikipedia.org/wiki/Satz_(Druck)}{Textsatzsystem} \TeX{} basiert und ist, vor allem im naturwissenschaftlichen Bereich, zu einem \emph{de facto} Standard geworden.
+Im Gegensatz zu den \href{https://de.wikipedia.org/wiki/WYSIWYG}{\emph{What You See is What You Get}} Systemen wie etwa Word, wird hier mittels Steuerelemente die Gestalt (Layout) des Dokuments festgelegt 
+-- \href{https://de.wikipedia.org/wiki/WYSIWYM}{\emph{What You See is What You Mean}}.
+Der Nutzer kann sich somit ganz auf den \emph{Inhalt} seiner Arbeit konzentrieren.
+Dies ist zwar am Anfang etwas aufwendiger zu erlernen ist, aber es ist dadurch flexibler und besser auf die eigenen Bedürfnisse anpassbar.%
+\footnote{Nebenbei: Word lernt man auch nicht über Nacht und für mathematischen Text ist dieses System weitestgehend unbrauchbar.}
+
+Zur Geschichte von \TeX{} und die Gründe, warum es \href{https://de.wikipedia.org/wiki/Donald_E._Knuth}{Donald Knuth} vor über 50 Jahren geschaffen hat, findet man in seinem Buch \enquote{Digital Typography} \cite{knuth:digital} oder in \textcite{beeton:math}.
+\href{https://de.wikipedia.org/wiki/LaTeX}{\LaTeX{}} selbst ist ein Makropaket, das auf \href{https://de.wikipedia.org/wiki/Leslie_Lamport}{L. Lamport} zurückgeht, der dieses um 1983 herum entwickelt hat -- siehe hierzu seine Erläuterungen in \cite{lamport:dmv}.
+
+Eine gute Referenz für einen ersten Einstieg ist \textcite{lshort-german}, da sich hier alles Wesentliche zur Nutzung von \LaTeX{} findet.
+Zu beachten ist aber, dass sich diese Einleitung auf \LaTeX{} des Jahres 2001 bezieht -- zwischenzeitlich ist einiges passiert, was die Eingabe erleichtert.
+Dies betrifft vor allem die Eingabe eines Textes mit Zeichensätzen außerhalb des anglo-amerikanischen Sprachraums.
+Trotzdem -- bitte unbedingt nutzen.
+
+Als Literatur ist das RRZN-Handbuch \emph{ \LaTeX{}-—Einführung in das Textsatzsystem} zu empfehlen, das man leider über das hiesige Rechenzentrum der Universität Tübingen nicht beziehen kann.%
+\footnote{Bei Interesse bin ich gern bereit eine Sammelbestellung zu initiieren.} 
+Die Bücher von Herbert Voß -- siehe hierzu \url{https://www.dante.de/dante-e-v/literatur/} -- sind für alle empfohlen, die sich intensiver mit \LaTeX\ beschäftigen wollen.
+Zu empfehlen ist \textcite{voss:2012a} \enquote{\citetitle{voss:2012a}} als Begleitlektüre.%
+\footnote{Gut ist auch die Begleitdokumentation von Overleaf, das man sich via \texttt{Help} anzeigen lassen kann}
+
+Für deutsche Texte sind die Dokumentenklassen, die auf KOMA-Script beruhen \textcite{kohm:2020}, da hier die Gegebenheiten bei uns berücksichtigt sind -- die Klassen von KOMA-Script werden in den Musterdateien genutzt.
+
+\subsection{Wie startet man}
+Zum Start bieten sich zwei Alternativen an:
+%
+\begin{myitemize}[nosep]
+	\item 
+	Eine lokale Installation auf seinen eigenen Laptop oder PC -- dies ist meine Empfehlung, wenn dies möglich ist.
+	
+	\item
+	Die Nutzung des Onlineangebots Overleaf \url{https://de.overleaf.com} -- dazu das zip-File in Overleaf installieren
+	(siehe hierzu die Anleitung zu der Vorlage).
+	
+\end{myitemize}
+%
+Zur lokalen Installation nutzt man die über die \TeX-Users Group (TUG) via \href{https://tug.org/texlive/}{TeX Live} zur Verfügung gestellt wird. 
+Dies betrifft Systeme mit Windows oder Ubuntu und dieses wird gepflegt, \dh es gibt jährlich ein Update.
+
+Wer zu den Glücklichen gehört, die einen Mac nutzen (mit OS X), für die steht eine auf TeX Live basierendes System zur Verfügung (\url{https://tug.org/mactex/}).
+Dieses System beinhaltet auch einen sehr guten Editor, \href{https://pages.uoregon.edu/koch/texshop/}{TeXshop}, ein Verwaltungsprogramm für die Literatur, \href{https://bibdesk.sourceforge.io}{BibDesk} und eine Reihe von Tools, die einem das Erstellen von \TeX{}-Dokumenten erleichtert..
+Einführung zu diesen Programmen findet man auch auf YouTube.
+
+Wie erwähnt, arbeitet \TeX{} mit Steuerzeichen die \enquote{sagen}, was gemacht werden soll.
+Man kann daher dieses System mit einer Programmiersprache vergleichen und es ist somit anfällig gegen Fehler bei der Eingabe dieser Steuerzeichen. 
+Eine einfache Regel für den Anfang: Sparsam sein bei der Verwendung von Steuerzeichen und nicht verzweifeln im Fehlerfall.
+Meistens stimmen die Klammern, speziell im Mathematikmodus, paarweise nicht!
+
+\subsection{Bitte beachten}
+%\subsubsection{}
+%
+Ein \enquote{\LaTeX{}-Sourcefile} besteht immer aus drei Teilen:
+
+\begin{myenumerate} 
+	\item 
+	\emph{Aus der Präambel:} Dies ist alles zwischen \verb|\documentclass[..| und \par
+	\verb|\begin{document}|.
+	Hier finden sich (in der Regel) eigene Definitionen, der Aufruf von speziellen Paketen, die man als Ergänzung nutzt etc.
+	Dazu einfach die Musterdatei und die Referenzen ansehen.
+	
+	\item
+	\emph{Aus dem Hauptteil: } Nach dem \verb!\begin{document}! startet der Teil, der den Inhalt darstellt.
+	Dieser wird entsprechend untergliedert und die einzelne Abschnitte mit Überschriften versehen.
+	Wie man dieses machen kann -- siehe das Muster.
+		
+	\item
+	\emph{Aus dem Schluss: } Dieser startet mit der Ausgabe der Literatur mittels der Umgebung für das Literaturverzeichnis -- \verb!\printbibiography! -- beinhaltet eventuell den Index \etc und endet mit \verb!\end{document}!.
+	
+	\item
+	Nach der Umwandlung und wenn alles richtig ist, hat man ein PDF-Dokument mit einem optisch ansprechenden \href{https://de.wikipedia.org/wiki/Layout}{Layout}.
+\end{myenumerate}
+%
+Ich habe ein kleines \LaTeX{}-File vorbereitet, das man für die ersten Gehversuche und die Erstellung der Ausarbeitung für die Hausarbeit nutzen kann.
+Diese Vorlage ist aber für eine Bachelor- oder Masterarbeit nicht ausreichend, aber man kann diese als Basis nehmen und entsprechend \enquote{ausbauen}.%
+\footnote{Ein Template für Bachelor- oder Masterarbeiten für AGFA findet sich auf GitHub unter \url{https://github.com/ugroh/AGFA-Master}}
+
+
+\subsection{Einige Tipps }
+Noch einige Tipps: 
+
+\begin{myenumerate}
+	\item
+	Starte jeden neuen Satz auf einer neuen Zeile.
+	Dies macht alles übersichtlicher und hilft, wenn man Fehler im Code sucht.
+	Es ist \TeX{} kein System, mit dem man \href{https://de.wikipedia.org/wiki/Fließtext}{Fließtext} schreiben sollte.
+	
+	\item
+	Bitte nicht \verb!\\! oder \verb!\newline! zu verwenden, um einen neuen Absatz zu erhalten.
+	Will man einen neunen Absatz haben, so macht man dies mittels einer Leerzeile im laufenden Text.
+	Den Rest -- Trennung nach den deutschen Regeln \ua -- macht dann das Programm.
+	
+	\item
+	Wer sich unsicher ist, ob die Rechtschreibung oder die Zeichensetzung stimmt, der findet unter 
+	\href{https://grammis.ids-mannheim.de}{https://grammis.ids-mannheim.de} Hilfe.
+	Und es gibt sogar Programme, die einem bei der Erstellung von Texten helfen, etwa \href{https://languagetool.org/de}{LanguageTool}.
+	Ganz zu schweigen von den KI-Tools wie \href{https://openai.com/blog/chatgpt/}{chatGTP }
+	
+	\item
+	Nutze \textcite{lshort-german} für die ersten \enquote{Gehversuche} in \LaTeX\@.
+	Aber bitte beachten: Es verwendet die Dokumentenklassen von \LaTeX{} als Beispiele, die aber nicht für die Eigenheiten der deutschen Sprache geeignet sind.
+	Besser ist es mit KOMA-Script zu arbeiten, wie es in den Vorlagen gemacht wurde (\textcite{kohm:2020}).
+	
+	\item
+	Es ist nicht mehr erforderlich, etwa Umlaute, durch spezielle Befehle einzugeben, wie es früher notwendig war.
+	Wer seinen Editor korrekt auf UTF-8 eingestellt hat, kann einfach schreiben.
+	
+	\item
+	Es gibt einige typographische Regeln, sowohl für die Eingabe eines Textes als auch für die Mathematik.
+	Mehr dazu findet man unter \href{http://menetekel.e-technik.fh-muenchen.de/skripten/LaTeX/typokurz.pdf}{typokurz}, auf \href{https://www.typolexikon.de}{dem TypoLexikon Online} und unter \textcite{nadler:formelsatz} nützliche Tipps.
+	
+	\item
+	Für den Einstieg in die Mathematik mit \LaTeX{} empfehle ich den AMS-Guide \cite{short-math-guide}.
+	Weiteres findet man dann etwa in \textcite{graetzer:2007} oder in \textcite{voss:2012b}.	
+	
+	\item
+	Zu empfehlen ist auch das Interview mit Leslie Lamport und seine drei Empfehlungen zu verinnerlichen (\cite{lamport:dmv})
+	
+	\item
+	Alle diejenigen, die schon \LaTeX{} nutzen: Mal in \textcite{l2tabu} reinschauen.
+	Dort finden sich alle Sünden, die man bei der Nutzung des Systems nicht machen soll.
+	
+		
+\end{myenumerate}

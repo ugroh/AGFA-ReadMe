@@ -436,3 +436,92 @@ Eine Übersicht ist in der folgenden Tabelle enthalten.
 Und immer daran denken: $ \dfrac{ \pi }{ 2 } $ geht nur so  und nicht so $ \pi/2 $.
 %%
 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Wie man es nicht machen sollte}\label{subsec:abschreckend}
+%
+Zum Schluss eine kleine Übung.
+Der folgende Ausschnitt stammt aus einem echten Manuskript -- mathematisch einwandfrei, aber als \LaTeX-Quelltext ein Sammelsurium dessen, was man vermeiden sollte.
+%
+\begin{tcblisting}{title= So bitte nicht, listing only}
+\begin{theorem}\label{nagy}\emph{\\}
+Let $(U(t,s))_{t \geq s}$ be a contractive, $1$-periodic evolution family on a Hilbert space $H$.
+Then there exists a $(U(t,s))_{t \geq s}$-invariant, orthogonal decomposition
+$$H=H_u(s)\oplus H_{nu}(s) \mbox{ for each } s \in \mathbb{R}$$
+decomposing the evolution family as ...
+where $U_{nu}(t,s):= U(t,s)_{|H_{nu}(s)}$ and ... such that
+\begin{enumerate}
+\item[(i)] $(U_{u}(t,s))_{t \geq s}$ is unitary and ...
+\item[(ii)] $(U_{nu}(t,s))_{t \geq s}$ is completely non-unitary.% and weakly stable on $H_{nu}(s)$, i.e.,
+%$$\left<U_{nu}(t,s)x,y \right> \stackrel{t \to \infty}{\longrightarrow} 0 \mbox{ for all $x\in H_{nu}(s)$ ... }$$
+\end{enumerate}
+\end{theorem}
+\begin{proof}In order to find the invariant subspaces ...
+\\
+\\
+We then use \hyperref[red]{Lemma \ref*{red}} to show that ...
+\begin{itemize}
+    \item[(a)] $\|M(s)x\|^2=\|x\|^2$ implies $\|M(t)U(t,s)x\|^2 =\|U(t,s)x\|^2$,
+    \item[(b)] ...
+\end{itemize}
+\end{tcblisting}
+%
+\begin{exercise}\label{aufg:abschreckend}
+Finde im obigen Quelltext alles, was man mit den Mitteln dieser Vorlage besser (oder überhaupt erst richtig) machen kann, und schreibe den Ausschnitt entsprechend um.
+Es sind mindestens sieben Punkte.
+\end{exercise}
+%
+Erst selbst versuchen -- die Lösung steht auf der nächsten Seite.
+%
+\clearpage
+\minisec{Lösung zu \cref{aufg:abschreckend}}
+%
+\begin{myenumerate}
+\item
+\verb|$$ ... $$| ist ein Relikt aus Plain-\TeX{} und stört in \LaTeX{} die Abstände; richtig ist \verb|\[ ... \]| (siehe \textcite{l2tabu}).
+\item
+\cs{mbox} im Mathemodus: Text in Formeln gehört in \cs{text}, den Abstand davor setzt man mit \cs{quad}.
+\item
+\verb|\emph{\\}| im Theoremkopf und \verb|\\ \\| im Beweis erzeugen Abstände mit Gewalt; ein neuer Absatz entsteht durch eine Leerzeile, sonst nichts.
+\item
+Handgeschriebene Nummern \verb|\item[(i)]| in \texttt{enumerate} und gar \verb|\item[(a)]| in \texttt{itemize}: Dafür gibt es \texttt{myenumerate} und \texttt{myequivalent} (siehe \vref{subsec:agfa-listen}); die Nummern entstehen dann von selbst und man kann auf sie verweisen.
+\item
+\verb|\hyperref[red]{Lemma \ref*{red}}| ist umständlich und fehleranfällig; das \verb|\cref{lem:reducing}| setzt Namen und Link von selbst. 
+Und Label wie \texttt{nagy}, \texttt{red} oder \texttt{unitary} verraten nicht, worauf sie zeigen -- besser mit Präfix: \texttt{thm:}, \texttt{lem:}, \texttt{eq:}.
+\item
+\verb+\|x\|+, \cs{mathbb}\brackets{R}, \verb|:=| und \verb|\left< ... \right>|: Hierfür gibt es \cs{norm}, \cs{R}, \cs{coloneqq} und \cs{dualp} (siehe \vref{agfa-mathtools} und \vref{agfa-defn}); \cs{stackrel} mit \cs{longrightarrow} ersetzt man durch \cs{xrightarrow}.
+\item
+Auskommentierte Textreste mitten im Satz eines Theorems: entweder löschen oder in eine eigene Datei auslagern -- spätestens beim nächsten Umbau weiß niemand mehr, was davon gilt.
+\end{myenumerate}
+%
+So sieht derselbe Anfang mit den Mitteln der Vorlage aus:
+%
+\begin{tcblisting}{title= So ist es richtig, listing only}
+\begin{theorem}\label{thm:zerlegung}
+Let $(U(t,s))_{t \geq s}$ be a contractive, $1$-periodic evolution family on a Hilbert space $H$.
+Then there exists a $(U(t,s))_{t \geq s}$-invariant, orthogonal decomposition
+\[
+H = H_u(s) \oplus H_{nu}(s) \quad \text{for each } s \in \R ,
+\]
+decomposing the evolution family as ...
+where $U_{nu}(t,s) \coloneqq U(t,s)|_{H_{nu}(s)}$ and ... such that
+\begin{myenumerate}
+\item
+$(U_u(t,s))_{t \geq s}$ is unitary and ...
+\item
+$(U_{nu}(t,s))_{t \geq s}$ is completely non-unitary.
+\end{myenumerate}
+\end{theorem}
+
+\begin{proof}
+In order to find the invariant subspaces ...
+
+We then use \cref{lem:reducing} to show that ...
+\begin{myequivalent}
+\item
+$\norm{M(s)x} = \norm{x}$ implies $\norm{M(t)U(t,s)x} = \norm{U(t,s)x}$,
+\item
+...
+\end{myequivalent}
+\end{proof}
+\end{tcblisting}
+%%

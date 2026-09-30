@@ -1,11 +1,12 @@
-% !TEX TS-program = pdflatexmk
-% !TEX useTabsWithFiles)
+% !TEX TS-program = lualatexmk
+% !TEX useTabsWithFiles
+% !TEX tabbedFile{./content/Abschnitt0.tex}(Abschnitt0)
 % !TEX tabbedFile{./content/Abschnitt1.tex}(Abschnitt1)
 % !TEX tabbedFile{./content/Abschnitt2.tex}(Abschnitt2)
 % !TEX tabbedFile{./content/Abschnitt3.tex}(Test)
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%  Thema:  agfa-readme.tex   
-% % Stand:	2025-09-13     
+%%  Thema:  AGFA-ReadMe.tex
+%%  Stand:  2026-09-30
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[%	
 	,toc		= bib 			 
@@ -15,7 +16,7 @@
 	,leqno
 	,version 	= last
 % 	,DIV 		= calc
-	,titlepage	= true
+	,titlepage	= true 
 %	,twoside = true
 	,ngerman				% Deutscher Text
 %	,english				% Englischer Text	
@@ -30,8 +31,7 @@
 %	,thmframed			% gerahmte Umgebungen
 %	,lmodern			% lmodern
 % 	,libertinus			% libertinus
-	,numeric
-	,doiurl
+	,numeric			% DOI-Links am Titel sind immer aktiv, keine Option noetig
 	]{agfa-art} 
 
 %% -- Was soll aktuell bearbeitet werden
@@ -47,7 +47,7 @@
 %% -- Für den Druck % entfernen; 
 %% -- Notwendige Bindekorrektur
 
-\KOMAoptions{BCOR = 12mm}
+%\KOMAoptions{BCOR = 12mm}
 
 %% -- für die finale Version die folgenden Zeilen 
 %% -- mit % auskommentieren
@@ -70,7 +70,7 @@
 \ExecuteBibliographyOptions{%
 	,backref		= true		% wo habe ich was referenziert, alles andere weg
  	,url		= true		% true	wenn online-Zitate separat gezeigt werden sollen
- 	,doi		= false		% dito falls unerwünscht, sinnvoll bei Vorlesungen 
+ 	,doi		= false		% DOI nicht als eigenes Feld drucken; der Titel bleibt DOI-Link
 	,eprint		= false		% dito
 	} 
 
@@ -98,9 +98,11 @@
 %% Frontmatter
 %% %%%%%%%%%%%%%%%%%%%%%%%%
 %% -- kann man anfangs übergehen
-%% -- daher %% hier und bei \end{comment} entfernen 
+%% -- daher %% hier und bei \end{comment} entfernen  
 
 %%\begin{comment}
+\pagenumbering{Alph}	% Titel und Inhaltsverzeichnis: eigene (unsichtbare) Nummern,
+						% sonst doppelte Sprungziele page.1, page.2
 \begingroup
 	\input{./content/0-agfa-title}			% Titelseite
 	\pagestyle{empty}
@@ -141,17 +143,32 @@
 %% Backmatter
 %% %%%%%%%%%%%%%%%%%%%%%%%%
 
-\thispagestyle{empty}
-\pagenumbering{roman}
-\setcounter{page}{1}
+%% -- Seitenzählung läuft arabisch weiter; ein erneutes \pagenumbering{roman}
+%% -- würde die Seiten i, ii, ... der Titelei doppelt vergeben (hyperref-Warnungen)
 
 %% -- Literaturverzeichnis
 %%
 %\nocite{}		% für Literatur, die nicht zitiert wurde; 
 				% wenig sinnvoll dieses zu tun; siehe ReadMe.pdf
 				
-\RaggedRight		% Kein Blocksatz
-\printbibliography
+\RaggedRight
+\printbibheading
+\defbibnote{hinweis1}{%
+	Wir verwenden als Standardliteratur das folgende Buch mit dem Kürzel als Referenz.}
+%
+\defbibnote{hinweis2}{%
+	Neben der oben angegebenen Standardliteratur haben wir die im Folgenden aufgeführte
+	Literatur genutzt.
+	Die Seiten, auf denen diese genutzt wurden, sind angegeben.}
+
+
+\printbiblist[heading=subbibliography,title={Standardliteratur},
+	prenote=hinweis1]{shorthand}
+%
+\printbibliography[heading=subbibliography,title={Weitere Literatur},
+	prenote=hinweis2,check=noshorthand]
+
+
 
 %% --
 \end{document}

@@ -1,6 +1,7 @@
 %% --
+% !TEX root = ../AGFA-ReadMe.tex
 %% ./content/Abschnitt0.tex = Abschnitt0 Kleine Einleitung
-%% -- Stand 2023/01/29
+%% -- Stand 2026-09-30
 \dictum[Paula Fox]{Ein guter Roman beginnt mit einer kleinen Frage und endet mit einer größeren.%
 	\footnote{Gilt auch für eine mathematische Arbeit}}
 %%
@@ -13,13 +14,13 @@
 \subsection{Was ist \LaTeX{}}
 %\subsubsection{}
 \LaTeX{} ist eine \href{https://de.wikipedia.org/wiki/Auszeichnungssprache}{Markup-Sprache}, die auf dem \href{https://de.wikipedia.org/wiki/Satz_(Druck)}{Textsatzsystem} \TeX{} basiert und ist, vor allem im naturwissenschaftlichen Bereich, zu einem \emph{de facto} Standard geworden.
-Im Gegensatz zu den \href{https://de.wikipedia.org/wiki/WYSIWYG}{\emph{What You See is What You Get}} Systemen wie etwa Word, wird hier mittels Steuerelemente die Gestalt (Layout) des Dokuments festgelegt 
+Im Gegensatz zu den \href{https://de.wikipedia.org/wiki/WYSIWYG}{\emph{What You See is What You Get}}-Systemen wie etwa Word wird hier mittels Steuerelementen die Gestalt (Layout) des Dokuments festgelegt 
 -- \href{https://de.wikipedia.org/wiki/WYSIWYM}{\emph{What You See is What You Mean}}.
 Der Nutzer kann sich somit ganz auf den \emph{Inhalt} seiner Arbeit konzentrieren.
-Dies ist zwar am Anfang etwas aufwendiger zu erlernen ist, aber es ist dadurch flexibler und besser auf die eigenen Bedürfnisse anpassbar.%
+Dies ist zwar am Anfang etwas aufwendiger zu erlernen, aber es ist dadurch flexibler und besser auf die eigenen Bedürfnisse anpassbar.%
 \footnote{Nebenbei: Word lernt man auch nicht über Nacht und für mathematischen Text ist dieses System weitestgehend unbrauchbar.}
 
-Zur Geschichte von \TeX{} und die Gründe, warum es \href{https://de.wikipedia.org/wiki/Donald_E._Knuth}{Donald Knuth} vor über 50 Jahren geschaffen hat, findet man in seinem Buch \enquote{Digital Typography} \cite{knuth:digital} oder in \textcite{beeton:math}.
+Zur Geschichte von \TeX{} und zu den Gründen, warum es \href{https://de.wikipedia.org/wiki/Donald_E._Knuth}{Donald Knuth} vor über 50 Jahren geschaffen hat, findet man in seinem Buch \enquote{Digital Typography} \cite{knuth:digital} oder in \textcite{beeton:math}.
 \href{https://de.wikipedia.org/wiki/LaTeX}{\LaTeX{}} selbst ist ein Makropaket, das auf \href{https://de.wikipedia.org/wiki/Leslie_Lamport}{L. Lamport} zurückgeht, der dieses um 1983 herum entwickelt hat -- siehe hierzu seine Erläuterungen in \cite{lamport:dmv}.
 
 Eine gute Referenz für einen ersten Einstieg ist \textcite{lshort-german}, da sich hier alles Wesentliche zur Nutzung von \LaTeX{} findet.
@@ -27,13 +28,13 @@ Zu beachten ist aber, dass sich diese Einleitung auf \LaTeX{} des Jahres 2001 be
 Dies betrifft vor allem die Eingabe eines Textes mit Zeichensätzen außerhalb des anglo-amerikanischen Sprachraums.
 Trotzdem -- bitte unbedingt nutzen.
 
-Als Literatur ist das RRZN-Handbuch \emph{ \LaTeX{}-—Einführung in das Textsatzsystem} zu empfehlen, das man leider über das hiesige Rechenzentrum der Universität Tübingen nicht beziehen kann.%
+Als Literatur ist das RRZN-Handbuch \emph{\LaTeX{} -- Einführung in das Textsatzsystem} zu empfehlen, das man leider über das hiesige Rechenzentrum der Universität Tübingen nicht beziehen kann.%
 \footnote{Bei Interesse bin ich gern bereit eine Sammelbestellung zu initiieren.} 
 Die Bücher von Herbert Voß -- siehe hierzu \url{https://www.dante.de/dante-e-v/literatur/} -- sind für alle empfohlen, die sich intensiver mit \LaTeX\ beschäftigen wollen.
 Zu empfehlen ist \textcite{voss:2012a} \enquote{\citetitle{voss:2012a}} als Begleitlektüre.%
 \footnote{Gut ist auch die Begleitdokumentation von Overleaf, das man sich via \texttt{Help} anzeigen lassen kann}
 
-Für deutsche Texte sind die Dokumentenklassen, die auf KOMA-Script beruhen \textcite{kohm:2020}, da hier die Gegebenheiten bei uns berücksichtigt sind -- die Klassen von KOMA-Script werden in den Musterdateien genutzt.
+Für deutsche Texte sind die Dokumentenklassen von KOMA-Script (\textcite{kohm:2020}) zu empfehlen, da hier die Gegebenheiten bei uns berücksichtigt sind -- die Klassen von KOMA-Script werden in den Musterdateien genutzt.
 
 \subsection{Wie startet man}
 Zum Start bieten sich zwei Alternativen an:
@@ -48,15 +49,16 @@ Zum Start bieten sich zwei Alternativen an:
 	
 \end{myitemize}
 %
-Zur lokalen Installation nutzt man die über die \TeX-Users Group (TUG) via \href{https://tug.org/texlive/}{TeX Live} zur Verfügung gestellt wird. 
-Dies betrifft Systeme mit Windows oder Ubuntu und dieses wird gepflegt, \dh es gibt jährlich ein Update.
+Zur lokalen Installation nutzt man \href{https://tug.org/texlive/}{\TeX~Live}, das von der \TeX{} Users Group (TUG) zur Verfügung gestellt wird. 
+Dies betrifft Systeme mit Windows oder Linux; \TeX~Live wird gepflegt, \dh es gibt jährlich ein Update.
+Die Vorlagen setzen \TeX~Live~2026 voraus.
 
-Wer zu den Glücklichen gehört, die einen Mac nutzen (mit OS X), für die steht eine auf TeX Live basierendes System zur Verfügung (\url{https://tug.org/mactex/}).
-Dieses System beinhaltet auch einen sehr guten Editor, \href{https://pages.uoregon.edu/koch/texshop/}{TeXshop}, ein Verwaltungsprogramm für die Literatur, \href{https://bibdesk.sourceforge.io}{BibDesk} und eine Reihe von Tools, die einem das Erstellen von \TeX{}-Dokumenten erleichtert..
+Wer zu den Glücklichen gehört, die einen Mac nutzen, für den steht mit MacTeX ein auf \TeX~Live basierendes System zur Verfügung (\url{https://tug.org/mactex/}).
+Dieses System beinhaltet auch einen sehr guten Editor, \href{https://pages.uoregon.edu/koch/texshop/}{TeXShop}, ein Verwaltungsprogramm für die Literatur, \href{https://bibdesk.sourceforge.io}{BibDesk} und eine Reihe von Tools, die einem das Erstellen von \TeX{}-Dokumenten erleichtern.
 Einführung zu diesen Programmen findet man auch auf YouTube.
 
 Wie erwähnt, arbeitet \TeX{} mit Steuerzeichen die \enquote{sagen}, was gemacht werden soll.
-Man kann daher dieses System mit einer Programmiersprache vergleichen und es ist somit anfällig gegen Fehler bei der Eingabe dieser Steuerzeichen. 
+Man kann daher dieses System mit einer Programmiersprache vergleichen und es ist somit anfällig für Fehler bei der Eingabe dieser Steuerzeichen. 
 Eine einfache Regel für den Anfang: Sparsam sein bei der Verwendung von Steuerzeichen und nicht verzweifeln im Fehlerfall.
 Meistens stimmen die Klammern, speziell im Mathematikmodus, paarweise nicht!
 
@@ -78,15 +80,15 @@ Ein \enquote{\LaTeX{}-Sourcefile} besteht immer aus drei Teilen:
 	Wie man dieses machen kann -- siehe das Muster.
 		
 	\item
-	\emph{Aus dem Schluss: } Dieser startet mit der Ausgabe der Literatur mittels der Umgebung für das Literaturverzeichnis -- \verb!\printbibiography! -- beinhaltet eventuell den Index \etc und endet mit \verb!\end{document}!.
+	\emph{Aus dem Schluss: } \verb!\printbibliography! gibt hier zunächst die Literatur aus; danach folgt eventuell der Index \etc, und alles endet mit \verb!\end{document}!.
 	
 	\item
 	Nach der Umwandlung und wenn alles richtig ist, hat man ein PDF-Dokument mit einem optisch ansprechenden \href{https://de.wikipedia.org/wiki/Layout}{Layout}.
 \end{myenumerate}
 %
-Ich habe ein kleines \LaTeX{}-File vorbereitet, das man für die ersten Gehversuche und die Erstellung der Ausarbeitung für die Hausarbeit nutzen kann.
-Diese Vorlage ist aber für eine Bachelor- oder Masterarbeit nicht ausreichend, aber man kann diese als Basis nehmen und entsprechend \enquote{ausbauen}.%
-\footnote{Ein Template für Bachelor- oder Masterarbeiten für AGFA findet sich auf GitHub unter \url{https://github.com/ugroh/AGFA-Master}}
+Für die ersten Gehversuche gibt es \texttt{seminar/AGFA-Seminar.tex}: eine einzige Datei, in der jede Zeile kommentiert ist.
+Wer die Grundlagen beherrscht, wechselt zu \texttt{AGFA-Light.tex} (Seminar- und Bachelorarbeiten) \bzw \texttt{AGFA-Master.tex} (Masterarbeit und mehr); für Arbeiten auf Englisch mit der Klasse \lpkg{amsart} gibt es \texttt{AGFA-AMS.tex}.%
+\footnote{Alle Vorlagen finden sich auf GitHub unter \url{https://github.com/ugroh/AGFA-Master}.}
 
 
 \subsection{Einige Tipps }
@@ -99,15 +101,15 @@ Noch einige Tipps:
 	Es ist \TeX{} kein System, mit dem man \href{https://de.wikipedia.org/wiki/Fließtext}{Fließtext} schreiben sollte.
 	
 	\item
-	Bitte nicht \verb!\\! oder \verb!\newline! zu verwenden, um einen neuen Absatz zu erhalten.
-	Will man einen neunen Absatz haben, so macht man dies mittels einer Leerzeile im laufenden Text.
+	Bitte nicht \verb!\\! oder \verb!\newline! verwenden, um einen neuen Absatz zu erhalten.
+	Will man einen neuen Absatz haben, so macht man dies mittels einer Leerzeile im laufenden Text.
 	Den Rest -- Trennung nach den deutschen Regeln \ua -- macht dann das Programm.
 	
 	\item
 	Wer sich unsicher ist, ob die Rechtschreibung oder die Zeichensetzung stimmt, der findet unter 
 	\href{https://grammis.ids-mannheim.de}{https://grammis.ids-mannheim.de} Hilfe.
 	Und es gibt sogar Programme, die einem bei der Erstellung von Texten helfen, etwa \href{https://languagetool.org/de}{LanguageTool}.
-	Ganz zu schweigen von den KI-Tools wie \href{https://openai.com/blog/chatgpt/}{chatGTP }
+	Ganz zu schweigen von KI-Werkzeugen wie ChatGPT oder Claude -- deren Ergebnisse aber immer selbst prüfen.
 	
 	\item
 	Nutze \textcite{lshort-german} für die ersten \enquote{Gehversuche} in \LaTeX\@.

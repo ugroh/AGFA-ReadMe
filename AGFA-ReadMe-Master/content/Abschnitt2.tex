@@ -1,7 +1,7 @@
-% !TEX root = ../agfa-readme.tex
+% !TEX root = ../AGFA-ReadMe.tex
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Section2 in ../agfa-readme.tex
-%% Stand: 2023/01/29
+%% Section2 in ../AGFA-ReadMe.tex
+%% Stand: 2026-09-30
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%
 \dictum[Erich Kästner]{Denkt an das fünfte Gebot: Schlagt eure Zeit nicht tot!}
 \thispagestyle{empty}
@@ -15,6 +15,22 @@ agfa-listen.sty
 \end{tcolorbox}
 %
 zusammengefasst und erweitert haben.
+
+Alle Listen dieser Vorlage beruhen auf \lpkg{enumitem} (siehe \textcite{enumitem}).
+Wer eine Liste anders gestaltet haben oder eine eigene definieren will, findet dort alle Möglichkeiten; die eigenen Definitionen gehören dann in die eigene Definitionsdatei und nicht in \texttt{agfa-listen.sty}.
+So ist etwa \texttt{myenumerate} definiert als
+%
+\begin{tcblisting}{listing only}
+\newlist{myenumerate}{enumerate}{2}
+\setlist[myenumerate,1]{%
+	label=\upshape(\roman*),
+	leftmargin=1em,
+	itemindent=2em
+}
+\end{tcblisting}
+%
+Einzelne Einstellungen lassen sich auch direkt beim Aufruf ändern, etwa \verb|\begin{enumerate}[(i)]| für die Zählung oder \texttt{nosep} für kompakte Abstände.
+
 Dazu einige Beispiele: 
 %
 \begin{tcblisting}{title= Nummerierte Listen, sidebyside }
@@ -56,7 +72,7 @@ Die Erweiterungen finden sich in dem \og \TeX{}-File, etwa
 \end{docEnvironment}
 %
 Dies ist die Umgebung für äquivalente Aussagen in Theorem, Sätzen etc., wobei die Eingabe wie bei Listen üblich mit \lcmd{item} erfolgt.
-Dies eignen sich für Aufzählungen, bei denen die einzelnen Items länger sind und über mehrere Zeilen gehen.
+Diese eignet sich für Aufzählungen, bei denen die einzelnen Items länger sind und über mehrere Zeilen gehen.
 Mittels der Option \texttt{nosep} kann man etwa steuern, ob die Items kompakt gesetzt werden sollen (kann man immer nutzen, auch bei den ersten Beispielen).
 
 %
@@ -97,7 +113,7 @@ Beispiel mit \texttt{myequivalent}:%
 	Sie hätten noch ins Boot springen können, aber der Reisende hob ein schweres, geknotetes Tau vom Boden, drohte ihnen damit und hielt sie dadurch von dem Sprunge ab. In den letzten Jahrzehnten ist das Interesse an Hungerkünstlern sehr zurückgegangen. Aber sie überwanden sich, umdrängten den Käfig und wollten sich gar nicht fortrühren.Jemand musste Josef K. verleumdet haben, denn ohne dass er etwas Böses getan hätte, wurde er eines Morgens verhaftet. »Wie ein Hund!« sagte er, es war, als sollte die Scham ihn überleben. Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich
 \end{myequivalent}
 %
-im Gegensatz zu \cs{enumerate[(a)]}
+im Gegensatz zu \verb|\begin{enumerate}[(a)]|
 %
 \begin{enumerate}[(a)]
 	\item
@@ -116,33 +132,63 @@ im Gegensatz zu \cs{enumerate[(a)]}
 	
 \end{enumerate}
 %
+Insgesamt stehen folgende Listen zur Verfügung:
+%
+\begin{center}
+\begin{tabular}{ll}\toprule
+Umgebung & Zählung \\ \midrule
+\texttt{myenumerate} & (i), (ii), (iii) \\
+\texttt{myequivalent} & (a), (b), (c) \\
+\texttt{mynumber} & (1), (2), (3) \\
+\texttt{myitemize} & Aufzählungspunkte \\
+\texttt{myinliner} & (i), (ii) im Fließtext \\
+\texttt{myinlinea} & (a), (b) im Fließtext \\ \bottomrule
+\end{tabular}
+\end{center}
+%
+Dazu kommen zwei gerahmte Umgebungen für kurze Hinweise \bzw eine Inhaltsübersicht, deren Punkte im Fließtext hintereinander gesetzt werden:
+%
+\begin{tcblisting}{title= synopsis und content}
+\begin{synopsis}
+\item Erster Hinweis \item Zweiter Hinweis
+\end{synopsis}
+\begin{content}
+\item Inhaltspunkt 1 \item Inhaltspunkt 2
+\end{content}
+\end{tcblisting}
+%
 \subsection{Das Paket \texttt{agfa-theorem}}\label{subsec:agfa-theorem}
 %%
-\begin{center}
 \begin{table}
+\centering
 \caption{Die Theoremumgebungen}\label{table:thm-umgebung}
-\begin{tabular}{lcll}\toprule
-THM-Umgebung	&   & Ersetzung dtsch. & Ersetzung engl. \\ \hline 
-\multicolumn{3}{c}{Mit Rahmen:}\\ 
-theorem oder thm 	&   & Theorem \\
-proposition	oder prop	&   & Satz & Proposition \\ 
-lemma	&   & Lemma \\ 
-corollary oder cor	&   & Korollar & Corollary \\ 
-\multicolumn{3}{c}{{Immer ohne Rahmen: } }\\ 
-definition	oder defn &   & Definition \\
-remark oder rem &   & Anmerkung & Remark \\
-proof	&   & Beweis & Proof \\
+\begin{tabular}{lll}\toprule
+THM-Umgebung	& Deutsch & Englisch \\ \midrule
+\multicolumn{3}{l}{\emph{Mit Rahmen bei Option \texttt{thmframed}:}}\\ 
+\texttt{theorem} oder \texttt{thm} 	& Theorem & Theorem \\
+\texttt{proposition} oder \texttt{prop}	& Satz & Proposition \\ 
+\texttt{lemma} oder \texttt{lem}	& Lemma & Lemma \\ 
+\texttt{corollary} oder \texttt{cor}	& Korollar & Corollary \\ 
+\texttt{conjecture} oder \texttt{conj}	& Vermutung & -- \\ \midrule
+\multicolumn{3}{l}{\emph{Immer ohne Rahmen:}}\\ 
+\texttt{definition} oder \texttt{defn} & Definition & Definition \\
+\texttt{example}, \texttt{examples} & Beispiel(e) & Example(s) \\
+\texttt{remark} oder \texttt{rem}, \texttt{remarks} & Anmerkung(en) & Remark(s) \\
+\texttt{exercise} oder \texttt{aufgabe} & Aufgabe & Exercise \\
+\texttt{summary}, \texttt{question} & Zusammenfassung, Frage & Summary, Question \\
+\texttt{proof}	& Beweis & Proof \\
 \bottomrule
 \end{tabular}
 \end{table}
-\end{center}
 
 %
 \begin{docEnvironment}{THM-Umgebung}{}
 \end{docEnvironment}
 %
 
-In diesem Paket finden sich die Umgebungen für Theoreme, Lemmata, Korollare \etc und man kann mittels der Option \texttt{thmframed} wählen, ob man einen Teil dieser Umgebungen eingerahmt haben will, was manchmal etwas Auflockerung in die mathematische Darstellung bringt.
+In diesem Paket finden sich die Umgebungen für Theoreme, Lemmata, Korollare \etc und man kann mittels der Option \texttt{thmframed} von \lpkg{agfa-art} wählen, ob man einen Teil dieser Umgebungen eingerahmt haben will, was manchmal etwas Auflockerung in die mathematische Darstellung bringt.
+Alle nummerierten Umgebungen teilen sich einen Zähler (\zB Theorem~2.1, Lemma~2.2), nur die Aufgaben werden eigenständig gezählt; \texttt{summary} und \texttt{question} sind nicht nummeriert.
+Die Umgebungen beruhen auf \lpkg{amsthm} und \lpkg{thmtools}, der Rahmen auf \lpkg{mdframed}.
 Wählt man Englisch als Sprache, so wird dies entsprechend berücksichtigt.
 Das Setzen der Umgebungen ist also immer gleich, man muss dem System nur sagen, was man will, \dh man ersetzt \texttt{THM-Umgebung} durch die entsprechende Definition (siehe \vref{table:thm-umgebung}). 
 
@@ -159,7 +205,7 @@ $ C\interval{0,1} $.
 %
 \end{tcblisting}
 %
-und mittels den üblichen Befehlen (siehe das entsprechende \LaTeX{}-Tipps dazu) kann man darauf verweisen:
+und mittels der üblichen Befehle (siehe die entsprechenden \LaTeX{}-Tipps dazu) kann man darauf verweisen; \cs{cref} und \cs{vref} setzen dabei den Namen (\enquote{Theorem}, \enquote{Korollar} \ldots) automatisch:
 %
 \begin{tcblisting}{title=Querverweis} 
 Wir verweisen auf \vref{thm:theorem} ...
@@ -182,37 +228,38 @@ Wir verweisen auf \vref{thm:theorem} ...
 %\end{otherlanguage}
 %
 \subsection{Einige Abkürzungen: \texttt{agfa-defn}}\label{agfa-defn}
-In dem Paket \texttt{agfa-defn} habe ich einige Abkürzungen eingestellt, die aus meiner Sicht nützlich sind und die Eingabe von \TeX\ erleichtert.
+In dem Paket \texttt{agfa-defn} habe ich einige Abkürzungen eingestellt, die aus meiner Sicht nützlich sind und die Eingabe von \TeX\ erleichtern.
 Diese habe ich hier nicht weiter im Detail aufgeführt, aber ein Blick in dieses Datei ist sicherlich nützlich.
 
 Vorab noch eine Anmerkung zur Eingabe eines mathematischen Textes: Auch hierfür gelten einige typographische Regeln, die zu beachten sind.
-Eine Kurzfassung findet man etwa in \textcite{nadler:formelsatz}, in \textcite[Kap. 9.1]{voss:2012a} und ausführlicher, versehen mit vielen Beispielen in \href{https://archiv.dante.de/DTK/PDF/komoedie_1997_1.pdf}{Marion Neubauer: \emph{Feinheiten bei wissenschaftlichen PublikationenPublikationen}}.%
+Eine Kurzfassung findet man etwa in \textcite{nadler:formelsatz}, in \textcite[Kap. 9.1]{voss:2012a} und ausführlicher, versehen mit vielen Beispielen in \href{https://archiv.dante.de/DTK/PDF/komoedie_1997_1.pdf}{Marion Neubauer: \emph{Feinheiten bei wissenschaftlichen Publikationen}}.%
 \footnote{Der Link ist hinterlegt und der Artikel findet sich ab Seite 25 und der zugehörige erste Teil \href{https://archiv.dante.de/DTK/PDF/komoedie_1996_4.pdf}{findet sich hier}}
 
-In \vref{tab:definitionen} finden sich einig Beispiele dazu.
+In \vref{tab:definitionen} finden sich einige Beispiele dazu.
 Den Rest bitte in der Datei \texttt{agfa-defn.sty} nachsehen.
 Falls mal ein mittels \cs{newcommand} definierter eigener Befehl nicht klappt (\ldots bereits definiert), dann unbedingt reinsehen.
 
 Noch ein Hinweis: Ich habe die \cs{var}-Varianten \enquote{umgetauft}: also \cs{phi} gibt $ \phi $ und \cs{varphi} gibt $ \varphi $. 
-Entsprechend auch bei den anderen aufgeführten Zeichensätze, die eine \cs{var}-Variante haben. 
+Entsprechend bei \cs{epsilon}, \cs{rho} und \cs{theta}, bei \cs{leq}, \cs{geq} (die schrägen Varianten) und \cs{preceq}; \cs{setminus} ist die kleine Variante.
+\cs{P} (Potenzmenge), \cs{L} (Operatorraum $\L{E}$) und \cs{d} (Differential) wirken nur im Mathemodus; im Text bleiben ¶, Ł und der Unterpunkt-Akzent erhalten. 
 %
 \begin{table}
-\begin{tabular}{l  >{$}l<{$} l l  >{$}l<{$} l}
-\cs{N}	&	\N 	& 		& 	\cs{phi} 			& 		\phi 		&  	\\
-\cs{Z}	&   \Z	&	   	& 	\cs{psi}			&      	\psi  			\\
-\cs{Q}	&   \Q 	&		&	\cs{epsilon}		&       \epsilon    	\\
-\cs{R}	&	\R	&		&	\cs{rho}			&	 	\rho 			\\
-\cs{C}	&	\C	&		&	\cs{theta}			&	 	\theta			\\
-\cs{P} 	&	\P	& Potenzmenge	& \cs{geq}		&	 	\geq 			\\
-\cs{diff}\brackets{\cs{mu}}	& \diff{\mu}  &	& \cs{leq}	&	 	\leq  \\
-\cs{dt}	&	\dt &	Eulersche Zahl		& 	\cs{eu} 	& \eu  &    \\
-\cs{ds} & 	\ds	& 	Imaginäre Einheit	&	\cs{im}	& \im &  \\
-\cs{e}  &  \e &&&&\\ \hline 
-\cs{finv}\marg{arg}	& \finv{arg} & Inverse Mengenfunktion & etwa & \finv{g}(A) \\
-\cs{Kern}\marg{arg}	& \Kern{arg}  & Kern & etwa & \Kern{T} \\
-\cs{Bild}\marg{arg}	& \Bild{arg} & Bild  & etwa & \Bild{T}\\
-\cs{Fix}\marg{arg}& \Fix{arg} & Fixraum & etwa & \Fix{T}\\ 
-%\cs{Sp}\marg{arg} & \Sp{arg}  & Spektrum & etwa & \Sp{T} \\
+\centering
+\begin{tabular}{l >{$}l<{$} l}\toprule
+Befehl & \text{Ergebnis} & Bedeutung \\ \midrule
+\cs{N}, \cs{Z}, \cs{Q}, \cs{R}, \cs{C}, \cs{K}	& \N, \Z, \Q, \R, \C, \K	& Zahlbereiche, Körper \\
+\cs{phi}, \cs{epsilon}, \cs{rho}, \cs{theta}	& \phi, \epsilon, \rho, \theta	& \enquote{var}-Varianten \\
+\cs{leq}, \cs{geq}	& \leq, \geq	& schräge Varianten \\ \midrule
+\cs{P}	& \P	& Potenzmenge \\
+\cs{1}, \cs{e}	& \1	& Eins \\
+\cs{eu}	& \eu	& Eulersche Zahl \\
+\cs{im}	& \im	& imaginäre Einheit \\
+\cs{diff}\brackets{\cs{mu}}, \cs{d}\brackets{\cs{mu}}	& \diff{\mu}	& Differential \\
+\cs{dt}, \cs{ds}, \cs{dx}	& \dt, \ds, \dx	& \\ \midrule
+\cs{finv}\brackets{g}	& \finv{g}(A)	& inverse Mengenfunktion \\
+\cs{Kern}\brackets{T}, \cs{Bild}\brackets{T}	& \Kern{T},\ \Bild{T}	& Kern, Bild \\
+\cs{Fix}\brackets{T}	& \Fix{T}	& Fixraum \\
+\cs{L}\brackets{E}	& \L{E}	& Operatoren \\ \bottomrule
 \end{tabular} 
 \caption{Einige Abkürzungen aus \texttt{agfa-defn}}\label{tab:definitionen}
 \end{table} 
@@ -314,6 +361,9 @@ Text $ \int_{ \R } \abs{f(t)} \dt $ Text \ldots
 %
 \end{dispExample*}
 %
+\minisec{Duale Paarung: }
+Entsprechend setzt \cs{dualp}\marg{x}\marg{y} die duale Paarung $ \dualp{x}{y} $; auch hier gibt es eine Sternvariante.
+%
 \minisec{Intervalle: }
 
 \begin{center}
@@ -342,20 +392,22 @@ Aber existiert auch das Integral der Funktion $ g $ mit
 \end{dispExample*}
 %%
 \minisec{Einfachere Eingabe von Klammern \etc}
-Will man etwa Klammern \enquote{ ( \ldots ) } der Größe an dem anpassen, was zwischen ihnen steht, muss man gewöhnlich mit \cs{big\ldots} arbeiten. 
-Dies kann man sich ersparen, da ein Macro eingearbeitet ist, dass einem diese Arbeit erspart. 
+Will man etwa Klammern \enquote{ ( \ldots ) } in der Größe an das anpassen, was zwischen ihnen steht, muss man gewöhnlich mit \cs{big\ldots} oder \cs{left}/\cs{right} arbeiten. 
+Dies kann man sich ersparen, da ein Makro eingearbeitet ist, das einem diese Arbeit abnimmt: Im Mathemodus sind ( ) und [ ] aktiv und passen sich automatisch an.
+Zwei Dinge sind dabei zu beachten:
+%
+\begin{myitemize}[nosep]
+\item
+Halboffene Intervalle wie $ \lointerval{a,b} $ nicht direkt als \verb|]a,b]| tippen, sondern \cs{lointerval}, \cs{rointerval} \bzw \cs{ointerval} verwenden.
+\item
+Eine Klammer nicht über \verb|&| oder \verb|\\| (etwa in \texttt{align}) hinweg öffnen oder schließen; siehe hierzu auch den Hinweis zu mehrzeiligen Klammern im \texttt{README.md}.
+\end{myitemize}
 %
 \begin{dispExample*}{title=Ein Beispiel}
 Also 
 %
 \[
 ( \frac{1}{1 - \sum_{j=1}^{n}r_{j}} )
-\]
-%
-oder
-%
-\[
-\left] \frac{1}{1 - \sum_{j=1}^{n}r_{j}} \right]
 \]
 %
 \bzw
@@ -368,15 +420,15 @@ eingeben; wie es aussieht sieht man unten.
 \end{dispExample*}
 %
 \minisec{Weitere Tools: }
-Der Ausdruck $ 1/2 $ in einem Fließtext ist nicht schön aber $ \nfrac{1}{2} $ ist es schon. 
-Ebenso ist $ \tfrac{E}{F} $ besser als E/F. 
-Es ist $ \interior{A} $ ist das Innere einer Menge eines topologischen Raums.
+Der Ausdruck 1/2 in einem Fließtext ist nicht schön, aber \sfrac{1}{2} ist es schon; im Mathemodus leistet dies \cs{mfrac}, also $ \mfrac{E}{F} $ statt $ E/F $.
+Will man \cs{sfrac} im Mathemodus nutzen, dann über \verb|\text{\sfrac{E}{F}}|.
+Es ist $ \interior{A} $ das Innere einer Menge eines topologischen Raums.
 Eine Übersicht ist in der folgenden Tabelle enthalten.
 %
 \begin{center}
 \begin{tabular}{l  l l }
-\docAuxCommand{tfrac\brackets{E}\brackets{F}} 	&   &   \tfrac{E}{F}   	\\
-\docAuxCommand{nfrac\brackets{a}\brackets{b}} 	&   &   $ \nfrac{a}{b} $	 \\
+\docAuxCommand{sfrac\brackets{a}\brackets{b}} (Text)	&   &   \sfrac{a}{b}   	\\
+\docAuxCommand{mfrac\brackets{E}\brackets{F}} (Mathemodus)	&   &   $ \mfrac{E}{F} $	 \\
 \docAuxCommand{interior\brackets{A}}  	&   &   $ \interior{A} $	 \\ 	
 \end{tabular}
 \end{center}
